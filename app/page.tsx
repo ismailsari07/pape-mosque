@@ -61,93 +61,109 @@ export default function Home() {
           faydalanıyoruz.
         </div>
         <div className="flex gap-8 justify-center items-center">
-          <div className="w-[50%] text-xl flex flex-col gap-4 justify-center items-center border border-foreground rounded-lg p-4 text-center">
-            <div>
-              26 Temmuz Cumartesi <br />1 Safer 1447
+          <div className="w-[50%] text-3xl flex flex-col gap-4 justify-center items-center">
+            <div className="flex gap-4 w-full">
+              <div className="w-1/2 flex flex-col bg-[#fbf2ee] text-[#1b1522] rounded-2xl p-4">
+                <div className="text-lg">Now Time is</div>
+                <div className="text-2xl font-semibold text-[#e87539]">Ogle</div>
+                <div className="text-4xl font-bold">12:27</div>
+                <div className="text-lg">
+                  End Time - <span className="font-semibold">3:54 p.m</span>
+                </div>
+              </div>
+
+              <div className="w-1/2 flex flex-col bg-[#fbf2ee] text-[#1b1522] rounded-2xl p-4">
+                <div className="text-lg">Next Prayer is</div>
+                <div className="text-2xl font-semibold text-[#e87539]">Ikindi</div>
+                <div className="text-4xl font-bold">03:54</div>
+                <div className="text-lg">
+                  Azan - <span className="font-semibold">5.15 p.m</span>
+                </div>
+                <div className="text-lg">
+                  Jamaat - <span className="font-semibold">5:30 p.m</span>
+                </div>
+              </div>
             </div>
 
-            <hr className="h-0.5 w-full bg-foreground" />
-
-            <div className="w-full flex gap-4 justify-center items-center">
-              <div className="w-1/2 text-center">
-                <div>Aksam Ezanina Kalan Sure</div>
-                <div>03:20:00</div>
+            <div className="w-full flex justify-around items-center bg-[#fbf2ee] text-[#1b1522] rounded-2xl p-2 px-5">
+              <div className="flex flex-col text-lg text-center">
+                <div>Sunrise</div>
+                <div className="font-semibold">6:17 a.m</div>
               </div>
-              <hr className="h-12 w-0.5 bg-foreground" />
-              <div className="w-1/2 text-center">
-                <p>Bilgisayar Saati</p>
-                <p>17:34</p>
+              <hr className="h-20 w-0.5 bg-gray-300" />
+              <div className="flex flex-col text-lg text-center">
+                <div>Mid Day</div>
+                <div className="font-semibold">2:43 p.m</div>
+              </div>
+              <hr className="h-20 w-0.5 bg-gray-300" />
+              <div className="flex flex-col text-lg text-center">
+                <div>Sunset</div>
+                <div className="font-semibold">6:57 p.m</div>
               </div>
             </div>
 
-            <hr className="h-0.5 w-full bg-foreground" />
-
-            <div className="text-3xl font-semibold text-center underline text-[#FFA500]">
-              Cuma Saati: 2:00
+            <div className="w-full bg-[#ffca9c] text-[#1b1522] rounded-2xl p-2 px-5 border-4 border-white text-center">
+              <div>Cumaa</div>
+              <span>Saati - </span>
+              <span className="font-extrabold">2:00 p.m</span>
             </div>
           </div>
 
           {/* Namaz Vakitleri */}
-          <div className="w-[50%] flex flex-col gap-3">
-            <div className="flex justify-around items-center text-lg px-4">
+          <div className="w-[50%] flex flex-col bg-[#fbf2ee] text-[#1b1522] gap-3 p-4 rounded-2xl">
+            <div className="flex justify-between items-center text-lg font-extrabold border-b border-gray-300 rounded-2xl p-2 px-10 bg-[#e87539]">
               <div>Namaz</div>
               <div>Ezan</div>
               <div>Ikame</div>
             </div>
-
-            {/* Sabah Namazi */}
-            <div className="flex justify-between items-center border border-foreground rounded-lg py-4 px-16 text-2xl shadow-2xl">
+            {/* Sabah Namazı */}
+            <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
               <div className="w-28 flex items-center gap-4">
-                <SunriseIcon />
+                <SunriseIcon className="text-[#e87539]" />
                 <span>Sabah</span>
               </div>
-
-              <div className="w-28">05:34 a.m</div>
-              <div className="w-28">6:00 a.m</div>
+              <div className="w-32">05:34 a.m</div>
+              <div className="w-32">06:00 a.m</div>
             </div>
 
-            {/* Ogle Namazi */}
-            <div className="flex justify-between items-center border border-foreground rounded-lg py-4 px-16 text-2xl shadow-2xl animated-gradient">
+            {/* Öğle Namazı */}
+            <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
               <div className="w-28 flex items-center gap-4">
-                <SunIcon />
-                <span>Ogle</span>
+                <SunIcon className="text-[#e87539]" />
+                <span>Öğle</span>
               </div>
-
-              <div className="w-28">01:15 p.m</div>
-              <div className="w-28">2:00 p.m</div>
+              <div className="w-32">01:15 p.m</div>
+              <div className="w-32">01:30 p.m</div>
             </div>
 
-            {/* Ikindi Namazi */}
-            <div className="flex justify-between items-center border border-foreground rounded-lg py-4 px-16 text-2xl shadow-2xl">
+            {/* İkindi Namazı */}
+            <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
               <div className="w-28 flex items-center gap-4">
-                <SunIcon />
-                <span>Ikindi</span>
+                <SunIcon className="text-[#e87539]" />
+                <span>İkindi</span>
               </div>
-
-              <div className="w-28">05:34 p.m</div>
-              <div className="w-28">05:45 p.m</div>
+              <div className="w-32">04:45 p.m</div>
+              <div className="w-32">05:00 p.m</div>
             </div>
 
-            {/* Aksam Namazi */}
-            <div className="flex justify-between items-center border border-foreground rounded-lg py-4 px-16 text-2xl shadow-2xl">
+            {/* Akşam Namazı */}
+            <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
               <div className="w-28 flex items-center gap-4">
-                <SunsetIcon />
-                <span>Aksam</span>
+                <SunsetIcon className="text-[#e87539]" />
+                <span>Akşam</span>
               </div>
-
-              <div className="w-28">08:34 p.m</div>
-              <div className="w-28">08:34 p.m</div>
+              <div className="w-32">08:21 p.m</div>
+              <div className="w-32">08:30 p.m</div>
             </div>
 
-            {/* Yatsi Namazi */}
-            <div className="flex justify-between items-center border border-foreground rounded-lg py-4 px-16 text-2xl shadow-2xl">
+            {/* Yatsı Namazı */}
+            <div className="flex justify-between items-center text-2xl font-medium p-3">
               <div className="w-28 flex items-center gap-4">
-                <MoonIcon />
-                <span>Yatsi</span>
+                <MoonIcon className="text-[#e87539]" />
+                <span>Yatsı</span>
               </div>
-
-              <div className="w-28">10:15 p.m</div>
-              <div className="w-28">10:15 p.m</div>
+              <div className="w-32">10:05 p.m</div>
+              <div className="w-32">10:15 p.m</div>
             </div>
           </div>
         </div>

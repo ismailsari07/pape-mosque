@@ -133,13 +133,7 @@ body {
   }
 }
 
-.animated-gradient {
-  background: linear-gradient(135deg, #0c2e03, #163c0c, #0c2e03);
-  background-size: 400% 400%;
-  animation: gradientShift 4s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
+@keyframes borderShift {
   0% {
     background-position: 0% 50%;
   }
@@ -150,3 +144,4 @@ body {
     background-position: 0% 50%;
   }
 }
+
