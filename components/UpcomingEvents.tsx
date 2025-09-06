@@ -37,7 +37,7 @@ export default function UpcomingEvents() {
         Discover our upcoming events and weekly programs designed to inspire,
         connect, and engage our community of all ages.
       </p>
-      <div className="flex gap-3 justify-between items-center md:mt-8">
+      <div className="flex flex-col md:flex-row gap-3 justify-between items-center md:mt-8">
         {events.map((event, i) => (
           <div
             key={i}

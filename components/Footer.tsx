@@ -15,12 +15,12 @@ export default function Footer() {
     <footer className="flex flex-col items-start gap-3 px-4 py-12 lg:p-24">
       <div className="container flex flex-col items-start gap-3">
         <h2 className="text-5xl font-semibold">Turkish Islamic Center</h2>
-        <p className="w-1/3 text-lg">
+        <p className="md:w-1/3 text-lg">
           All are welcome to join our prayers, programs, and community
           gatherings. Experience the warmth of our inclusive spiritual family.
         </p>
         <Button variant={"secondary"}>Support Us</Button>
-        <div className="w-full flex justify-between items-start my-8">
+        <div className="w-full flex flex-col md:flex-row justify-between items-start max-md:gap-5 my-8">
           {/* Follow Us */}
           <div>
             <h4 className="font-semibold mb-3">Follow Us</h4>
@@ -50,7 +50,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-semibold mb-3">Services</h4>
+            <h4 className="font-semibold md:mb-3">Services</h4>
             <ul className="space-y-1">
               <li>
                 <a href="#">Funeral Services</a>
@@ -69,7 +69,7 @@ export default function Footer() {
 
           {/* Get Help */}
           <div>
-            <h4 className="font-semibold mb-3">Get Help</h4>
+            <h4 className="font-semibold md:mb-3">Get Help</h4>
             <ul className="space-y-1">
               <li>
                 <a href="#">Dernegimiz</a>

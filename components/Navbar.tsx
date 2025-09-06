@@ -7,14 +7,14 @@ export default function Navbar() {
     <nav className="flex justify-evenly items-center p-6 text-lg">
       <a href="#">Logo</a>
 
-      <div className="flex items-center gap-4">
+      <div className="hidden md:flex items-center gap-4">
         <a href="#">Dernegimiz</a>
         <a href="">Hizmetlerimiz</a>
         <a href="">Bagis</a>
         <a href="">Faydali LInkler</a>
       </div>
 
-      <Button>Support Us ❤️</Button>
+      <Button className="max-md:text-sm">Support Us ❤️</Button>
     </nav>
   );
 }

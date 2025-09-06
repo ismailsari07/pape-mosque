@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <header
       id="header"
-      className="flex flex-col items-center gap-6 lg:gap-12 text-center py-16 lg:py-32"
+      className="flex flex-col items-center gap-6 lg:gap-12 text-center py-8 lg:py-32"
     >
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8 text-white">
         <h1 className="text-5xl md:text-8xl font-header md:px-24">
@@ -21,8 +21,8 @@ export default function Hero() {
           <br /> destek sunarak hizmet veriyoruz.
         </p>
         <div className="flex gap-4">
-          <Button>Namaz Vakitleri</Button>
-          <Button>Support Us ❤️</Button>
+          <Button className="max-md:text-sm">Namaz Vakitleri</Button>
+          <Button className="max-md:text-sm">Support Us ❤️</Button>
         </div>
         <div>
           <Button size="icon" variant="ghost" className="opacity-70">

@@ -3,13 +3,13 @@ export default function PrayerTimes() {
   return (
     <section id="prayer-times" className="flex flex-col gap-4 py-16 lg:py-32">
       <h2 className="text-4xl md:text-6xl text-left">Namaz Vakitleri</h2>
-      <div className="w-[50%]">
+      <div className="md:w-[50%]">
         Namaz vakitleri, Diyanet İşleri Başkanlığı verilerine dayanarak
         sunulmaktadır. İbadetlerinizi en doğru zamanda yerine getirmeniz için
         güvenilir ve resmi kaynaklardan faydalanıyoruz.
       </div>
-      <div className="flex gap-8 justify-center items-center">
-        <div className="w-[50%] text-3xl flex flex-col gap-4 justify-center items-center">
+      <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+        <div className="md:w-[50%] text-3xl flex flex-col gap-4 justify-center items-center">
           <div className="flex gap-4 w-full">
             <div className="w-1/2 flex flex-col bg-[#fbf2ee] text-[#1b1522] rounded-2xl p-4">
               <div className="text-lg">Now Time is</div>
@@ -60,15 +60,15 @@ export default function PrayerTimes() {
         </div>
 
         {/* Namaz Vakitleri */}
-        <div className="w-[50%] flex flex-col bg-[#fbf2ee] text-[#1b1522] gap-3 p-4 rounded-2xl">
-          <div className="flex justify-between items-center text-lg font-extrabold border-b border-gray-300 rounded-2xl p-2 px-10 bg-[#e87539]">
+        <div className="w-full md:w-[50%] flex flex-col bg-[#fbf2ee] text-[#1b1522] gap-3 p-1 md:p-4 rounded-2xl">
+          <div className="flex justify-between items-center text-base md:text-lg font-extrabold border-b border-gray-300 rounded-2xl p-2 px-10 bg-[#e87539]">
             <div>Namaz</div>
             <div>Ezan</div>
             <div>Ikame</div>
           </div>
           {/* Sabah Namazı */}
-          <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
-            <div className="w-28 flex items-center gap-4">
+          <div className="flex justify-between items-center text-base md:text-2xl font-medium border-b border-b-gray-300 p-3">
+            <div className="w-28 flex items-center gap-1 md:gap-4">
               <SunriseIcon className="text-[#e87539]" />
               <span>Sabah</span>
             </div>
@@ -77,8 +77,8 @@ export default function PrayerTimes() {
           </div>
 
           {/* Öğle Namazı */}
-          <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
-            <div className="w-28 flex items-center gap-4">
+          <div className="flex justify-between items-center text-base md:text-2xl font-medium border-b border-b-gray-300 p-3">
+            <div className="w-28 flex items-center gap-1 md:gap-4">
               <SunIcon className="text-[#e87539]" />
               <span>Öğle</span>
             </div>
@@ -87,8 +87,8 @@ export default function PrayerTimes() {
           </div>
 
           {/* İkindi Namazı */}
-          <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
-            <div className="w-28 flex items-center gap-4">
+          <div className="flex justify-between items-center text-base md:text-2xl font-medium border-b border-b-gray-300 p-3">
+            <div className="w-28 flex items-center gap-1 md:gap-4">
               <SunIcon className="text-[#e87539]" />
               <span>İkindi</span>
             </div>
@@ -97,8 +97,8 @@ export default function PrayerTimes() {
           </div>
 
           {/* Akşam Namazı */}
-          <div className="flex justify-between items-center text-2xl font-medium border-b border-b-gray-300 p-3">
-            <div className="w-28 flex items-center gap-4">
+          <div className="flex justify-between items-center text-base md:text-2xl font-medium border-b border-b-gray-300 p-3">
+            <div className="w-28 flex items-center gap-1 md:gap-4">
               <SunsetIcon className="text-[#e87539]" />
               <span>Akşam</span>
             </div>
@@ -107,8 +107,8 @@ export default function PrayerTimes() {
           </div>
 
           {/* Yatsı Namazı */}
-          <div className="flex justify-between items-center text-2xl font-medium p-3">
-            <div className="w-28 flex items-center gap-4">
+          <div className="flex justify-between items-center text-base md:text-2xl font-medium p-3">
+            <div className="w-28 flex items-center gap-1 md:gap-4">
               <MoonIcon className="text-[#e87539]" />
               <span>Yatsı</span>
             </div>

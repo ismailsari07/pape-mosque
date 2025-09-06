@@ -32,6 +32,7 @@ const services = [
 
 export default function Services() {
   const [selectedServices, setSelectedServices] = useState(services[0]);
+  console.log("Selected:", selectedServices);
 
   return (
     <section id="services" className="flex flex-col gap-3 py-16 lg:py-32">
@@ -42,8 +43,8 @@ export default function Services() {
         to support your spiritual journey and strengthen our community bonds
         through meaningful service and care.
       </p>
-      <div className="flex gap-5 justify-between items-start">
-        <div className="w-1/3 flex flex-col gap-2 items-start">
+      <div className="flex flex-col md:flex-row gap-5 justify-between items-start">
+        <div className="hidden w-1/3 md:flex flex-col gap-2 items-start">
           {services.map((service) => (
             <motion.li
               key={service.title}
@@ -60,7 +61,34 @@ export default function Services() {
             </motion.li>
           ))}
         </div>
-        <div className="w-2/4">
+
+        <nav className="block md:hidden bg-white border-b border-gray-200 rounded-t-lg px-2 py-1 w-full h-auto">
+          <ul className="flex text-sm font-medium space-x-1 overflow-x-auto overflow-y-hidden">
+            {services.map((item) => (
+              <motion.li
+                key={item.title}
+                initial={false}
+                className={`relative px-4 py-2 rounded-t-md cursor-pointer flex items-center gap-2 transition-colors ${
+                  selectedServices.title === item.title
+                    ? "bg-gray-100 text-black"
+                    : "text-gray-500 hover:bg-gray-50"
+                }`}
+                onClick={() => setSelectedServices(item)}
+              >
+                <span>{item.title}</span>
+
+                {selectedServices.title === item.title && (
+                  <motion.div
+                    layoutId="underline"
+                    className="absolute left-0 right-0 -bottom-[2px] h-[2px] bg-orange-500 rounded"
+                  />
+                )}
+              </motion.li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="w-2/4 hidden md:block">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedServices ? selectedServices.title : "empty"}
@@ -75,6 +103,26 @@ export default function Services() {
                 src={selectedServices ? selectedServices.imageUrl : "empty"}
                 alt="services"
                 className="w-full h-auto rounded-2xl border-2 border-amber-100"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div className="md:w-2/4 block md:hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedServices ? selectedServices.title : "empty"}
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Image
+                width={500}
+                height={500}
+                src={selectedServices ? selectedServices.imageUrl : "empty"}
+                alt="services"
+                className="rounded-2xl border-2 border-amber-100"
               />
             </motion.div>
           </AnimatePresence>
