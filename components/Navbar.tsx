@@ -1,7 +1,6 @@
-'use client';
+"use client";
 
-import { ArrowRight } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   return (
@@ -15,9 +14,7 @@ export default function Navbar() {
         <a href="">Faydali LInkler</a>
       </div>
 
-      <Button>
-      Support Us  ❤️
-      </Button>
+      <Button>Support Us ❤️</Button>
     </nav>
   );
 }

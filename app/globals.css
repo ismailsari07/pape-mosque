@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -40,7 +40,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-[theme='dark'] {
+[theme="dark"] {
   --dark: #d1cfc0;
   --paper: #0e140c;
 }
@@ -90,6 +90,11 @@ body {
   color: var(--paper);
 }
 
+footer {
+  background: var(--paper);
+  color: var(--dark);
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -131,6 +136,45 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* default */
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 100%;
+      padding-left: 1.5rem; /* sm */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 100%;
+      padding-left: 1.5rem; /* md */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+      padding-left: 1.5rem; /* lg */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px !important;
+      padding-left: 2rem; /* xl */
+      padding-right: 2rem;
+    }
+  }
 }
 
 @keyframes borderShift {
@@ -144,4 +188,3 @@ body {
     background-position: 0% 50%;
   }
 }
-
