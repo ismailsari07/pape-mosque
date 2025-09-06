@@ -108,7 +108,7 @@ export default function Services() {
           </AnimatePresence>
         </div>
 
-        <div className="md:w-2/4 block md:hidden">
+        <div className="md:w-2/4 block md:hidden h-[200px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedServices ? selectedServices.title : "empty"}
