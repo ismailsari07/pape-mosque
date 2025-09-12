@@ -32,7 +32,6 @@ const services = [
 
 export default function Services() {
   const [selectedServices, setSelectedServices] = useState(services[0]);
-  console.log("Selected:", selectedServices);
 
   return (
     <section id="services" className="flex flex-col gap-3 py-16 lg:py-32">
@@ -88,6 +87,7 @@ export default function Services() {
           </ul>
         </nav>
 
+        {/*TODO: duzenle; iki tane main container var*/}
         <div className="w-2/4 hidden md:block">
           <AnimatePresence mode="wait">
             <motion.div
@@ -102,7 +102,7 @@ export default function Services() {
                 height={500}
                 src={selectedServices ? selectedServices.imageUrl : "empty"}
                 alt="services"
-                className="w-full h-auto rounded-2xl border-2 border-amber-100"
+                className="w-full h-auto rounded-2xl border border-amber-100"
               />
             </motion.div>
           </AnimatePresence>
@@ -122,7 +122,7 @@ export default function Services() {
                 height={500}
                 src={selectedServices ? selectedServices.imageUrl : "empty"}
                 alt="services"
-                className="rounded-2xl border-2 border-amber-100"
+                className="rounded-2xl border border-amber-100"
               />
             </motion.div>
           </AnimatePresence>

@@ -2,7 +2,6 @@ import {
   FacebookIcon,
   GithubIcon,
   LocateIcon,
-  LucideMailbox,
   MailIcon,
   PhoneCall,
   TwitterIcon,
