@@ -2,27 +2,28 @@ import { Calendar1Icon, PhoneCallIcon } from "lucide-react";
 
 const events = [
   {
-    title: "Friday Jumu'ah Prayer",
+    title: "Pazar Kahvaltısı",
     description:
-      "Khutbah begins at 1:15 PM, prayer at 1:45 PM. Arrive early for seating.",
-    time: "Every Friday — 1:15 PM",
-    phone: "(416) 778-0014",
-    priority: "weekly",
-  },
-  {
-    title: "Qur'an Study Circle",
-    description:
-      "Weekly tafsir and recitation—open to all levels. Bring your mushaf.",
-    time: "Wednesdays — 7:30 PM",
-    phone: "(416) 778-0014",
-    priority: "weekly",
-  },
-  {
-    title: "Youth Night Gathering",
-    description: "Games, snacks, and a short reminder. Ages 12–18 welcome.",
-    time: "Saturday, October 12 — 6:00 PM",
+      "Önümüzdeki pazar, tüm Türk toplumu için camimizde kahvaltı ikramı yapılacaktır.",
+    time: "Pazar — 10:00 AM",
     phone: "(416) 778-0014",
     priority: null,
+  },
+  {
+    title: "Gençlik Sohbeti",
+    description:
+      "Her çarşamba yatsıdan sonra gençlerle sohbet, ardından yemek ikramı. Haftalık programdır.",
+    time: "Çarşamba — Yatsı Namazı",
+    phone: "(416) 778-0014",
+    priority: "haftalık",
+  },
+  {
+    title: "Aile Toplantısı",
+    description:
+      "Her cuma yatsıdan sonra ailelerin buluşması, sohbet ve çay ikramı ile haftalık buluşma.",
+    time: "Cuma — Yatsı Namazı",
+    phone: "(416) 778-0014",
+    priority: "haftalık",
   },
 ];
 
@@ -32,7 +33,7 @@ export default function UpcomingEvents() {
       id="upcoming-events"
       className="flex flex-col gap-3 items-center text-center py-16 lg:py-32"
     >
-      <h3 className="text-4xl md:text-6xl font-semibold">Upcoming Events</h3>
+      <h3 className="text-4xl md:text-6xl font-semibold">Yaklaşan Etkinlik</h3>
       <p className="md:w-1/2 text-lg">
         Discover our upcoming events and weekly programs designed to inspire,
         connect, and engage our community of all ages.

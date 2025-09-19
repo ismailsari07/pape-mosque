@@ -2,19 +2,17 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { AlignJustify, ArrowRight, Hamburger, HamburgerIcon, LucideHamburger, Navigation, Navigation2, NavigationIcon, PanelLeft } from "lucide-react";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { ArrowRight, PanelLeft } from "lucide-react";
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
@@ -29,38 +27,41 @@ export default function Navbar() {
       </div>
 
       <div className="block md:hidden">
-<Sheet>
-      <SheetTrigger asChild>
-        <Button variant={"ghost"}><PanelLeft size={20} /></Button>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Hızlı Erişim</SheetTitle>
-          <SheetDescription>
-          Tüm sayfalarımıza kolayca ulaşmak için menüyü kullanın.
-          </SheetDescription>
-        </SheetHeader>
-      <div className="flex flex-col items-center gap-4">
-        <SheetClose asChild>
-          <Link href={"/about"}>Dernegimiz</Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link href={"/service"}>Hizmetlerimiz</Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link href={"/donation"}>Bagis</Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link href={"/contact"}>Iletisim</Link>
-        </SheetClose>
-      </div>
-      </SheetContent>
-    </Sheet>
-
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant={"ghost"}>
+              <PanelLeft size={20} />
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Hızlı Erişim</SheetTitle>
+              <SheetDescription>
+                Tüm sayfalarımıza kolayca ulaşmak için menüyü kullanın.
+              </SheetDescription>
+            </SheetHeader>
+            <div className="flex flex-col items-center gap-4">
+              <SheetClose asChild>
+                <Link href={"/about"}>Dernegimiz</Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link href={"/service"}>Hizmetlerimiz</Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link href={"/donation"}>Bagis</Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link href={"/contact"}>Iletisim</Link>
+              </SheetClose>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
 
       <Link href={"/donation"} className="hidden md:block">
-      <Button className="max-md:text-sm">Support Us <ArrowRight size={16} /></Button>
+        <Button className="max-md:text-sm">
+          Destekte Bulunun <ArrowRight size={16} />
+        </Button>
       </Link>
     </nav>
   );

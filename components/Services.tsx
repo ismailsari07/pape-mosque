@@ -5,27 +5,27 @@ import { useState } from "react";
 
 const services = [
   {
-    title: "Funeral Services",
+    title: "Cenaze Hizmetleri",
     description:
-      "We assist with Islamic funeral arrangements, burials, and provide spiritual support during times of loss.",
+      "İslami cenaze düzenlemeleri, defin işlemleri ve kayıp zamanlarında manevi destek sağlıyoruz.",
     imageUrl: "/service1.jpg",
   },
   {
-    title: "Qur'an Lessons",
+    title: "Kur'an Dersleri",
     description:
-      "Learn to read and understand the Qur'an from experienced teachers in a calm, respectful setting.",
+      "Deneyimli hocalardan huzurlu ve saygılı bir ortamda Kur’an okumayı ve anlamayı öğrenin.",
     imageUrl: "/service2.jpg",
   },
   {
-    title: "Marriage Services",
+    title: "Nikah Hizmetleri",
     description:
-      "We offer Islamic Nikah ceremonies and marriage support, guided by faith and community traditions.",
+      "İslami nikah törenleri ve evlilik desteği sunuyor, inanç ve geleneklere bağlı kalıyoruz.",
     imageUrl: "/service3.jpg",
   },
   {
-    title: "Ramadan Iftar Meals",
+    title: "Ramazan İftar Yemekleri",
     description:
-      "Join our welcoming community for daily iftar meals during Ramadan, fostering connection and faith.",
+      "Ramazan boyunca günlük iftar yemeklerimizde topluluğumuza katılın, birlik ve imanı pekiştirin.",
     imageUrl: "/service4.jpg",
   },
 ];
@@ -35,12 +35,15 @@ export default function Services() {
 
   return (
     <section id="services" className="flex flex-col gap-3 py-16 lg:py-32">
-      <h3 className="text-4xl md:text-6xl font-semibold">Our Services</h3>
+      <h3 className="text-4xl md:text-6xl font-semibold">
+        Dini ve Sosyal Hizmetler
+      </h3>
       <p className="md:w-1/2">
-        We offer essential religious and community services including funerals,
-        marriage ceremonies, Quran lessons, and Ramadan iftar meals. Our goal is
-        to support your spiritual journey and strengthen our community bonds
-        through meaningful service and care.
+        Cenaze hizmetleri, nikah törenleri, Kur’an dersleri ve Ramazan iftar
+        yemekleri dâhil olmak üzere temel dini ve toplumsal hizmetler sunuyoruz.
+        Amacımız, manevi yolculuğunuzda sizlere destek olmak ve anlamlı
+        hizmetler ile ilgiyi güçlendirerek topluluk bağlarımızı
+        kuvvetlendirmektir.
       </p>
       <div className="flex flex-col md:flex-row gap-5 justify-between items-start">
         <div className="hidden w-1/3 md:flex flex-col gap-2 items-start">
