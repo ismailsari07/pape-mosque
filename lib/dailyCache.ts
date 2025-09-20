@@ -6,7 +6,7 @@ let cache: Cache<any> = { dayKey: null, data: null };
 // America/Toronto gün anahtarı (YYYY-MM-DD)
 export function todayKeyTZ(tz = "America/Toronto") {
   const d = new Date();
-  const [y, m, day] = new Intl.DateTimeFormat("en-CA", {
+  const {y, m, day} = new Intl.DateTimeFormat("en-CA", {
     timeZone: tz,
     year: "numeric",
     month: "2-digit",
