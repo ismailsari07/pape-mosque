@@ -16,7 +16,9 @@ import {
 export default function Navbar() {
   return (
     <nav className="flex justify-between md:justify-evenly items-center p-6 text-lg">
-      <Link href="/" className="text-bold text-2xl">Turk Islam Vakfı</Link>
+      <Link href="/" className="text-bold text-2xl">
+        Türk İslam Vakfı
+      </Link>
 
       <div className="hidden md:flex items-center gap-4">
         <Link href={"/about"}>Dernegimiz</Link>

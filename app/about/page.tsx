@@ -28,32 +28,32 @@ export default function About() {
       name: "Ahmet Er",
       title: "Başkan",
       contactType: "phone" as ContactType,
-      contactText: "647 709 7219"
+      contactText: "647 709 7219",
     },
     {
       name: "Orhun Belir",
       title: "Başkan Yardımcısı",
       contactType: "email" as ContactType,
-      contactText: "info@papecami.com"
+      contactText: "info@papecami.com",
     },
     {
-      name: "Abdullah Abi",
+      name: "Abdullah Yumbul",
       title: "Mali İşler Sorumlusu",
       contactType: "email" as ContactType,
-      contactText: "info@papecami.com"
+      contactText: "info@papecami.com",
     },
     {
       name: "Yasemin Akbulut",
       title: "Sekreter",
       contactType: "email" as ContactType,
-      contactText: "info@papecami.com"
+      contactText: "info@papecami.com",
     },
     {
       name: "Faruk Özkan",
       title: "Din Görevlisi",
       contactType: "phone" as ContactType,
-      contactText: "647 834 2000"
-    }
+      contactText: "647 834 2000",
+    },
   ];
 
   return (
@@ -111,12 +111,16 @@ export default function About() {
               {gorevli.contactType === "phone" ? (
                 <>
                   <PhoneIcon size={16} />
-                  <a href={`tel:${gorevli.contactText.replace(/[^+\d]/g, "")}`}>{gorevli.contactText}</a>
+                  <a href={`tel:${gorevli.contactText.replace(/[^+\d]/g, "")}`}>
+                    {gorevli.contactText}
+                  </a>
                 </>
               ) : (
                 <>
                   <MailIcon size={16} />
-                  <a href={`mailto:${gorevli.contactText}`}>{gorevli.contactText}</a>
+                  <a href={`mailto:${gorevli.contactText}`}>
+                    {gorevli.contactText}
+                  </a>
                 </>
               )}
             </div>

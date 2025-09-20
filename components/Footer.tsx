@@ -16,9 +16,12 @@ export default function Footer() {
       <div className="container flex flex-col items-start gap-3">
         <h2 className="text-5xl font-semibold">Türk İslam Vakfı Kanada</h2>
         <p className="md:w-1/3 text-lg">
-       Herkes, dualarımıza, programlarımıza ve topluluk buluşmalarımıza katılmaya davetlidir. Kapsayıcı manevi ailemizin sıcaklığını yaşayın. 
+          Herkes, dualarımıza, programlarımıza ve topluluk buluşmalarımıza
+          katılmaya davetlidir. Kapsayıcı manevi ailemizin sıcaklığını yaşayın.
         </p>
-        <Button variant={"secondary"}><Link href={"donation"}>Destekte Bulunun</Link></Button>
+        <Button variant={"secondary"}>
+          <Link href={"donation"}>Destekte Bulunun</Link>
+        </Button>
         <div className="w-full flex flex-col md:flex-row justify-between items-start max-md:gap-5 my-8">
           {/* Follow Us */}
           <div>
@@ -53,40 +56,41 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Hizmetlerimiz */}
-          <div>
-            <h4 className="font-semibold md:mb-3">Hizmetlerimiz</h4>
-            <ul className="space-y-1">
-              <li>
-                <a href="#">Cenaze Hizmetleri</a>
-              </li>
-              <li>
-                <a href="#">Kur'an Dersleri</a>
-              </li>
-              <li>
-                <a href="#">Nikah İşlemleri</a>
-              </li>
-              <li>
-                <a href="#">Ramazan İftarları</a>
-              </li>
-            </ul>
-          </div>
-
           {/* Yardım */}
           <div>
             <h4 className="font-semibold md:mb-3">Hızlı Erişim</h4>
             <ul className="space-y-1">
               <li>
-                <Link href="/about" className="hover:text-green-500 transition-colors">Derneğimiz</Link>
+                <Link
+                  href="/about"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  Derneğimiz
+                </Link>
               </li>
               <li>
-                <Link href="/service" className="hover:text-green-500 transition-colors">Hizmetlerimiz</Link>
+                <Link
+                  href="/service"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  Hizmetlerimiz
+                </Link>
               </li>
               <li>
-                <Link href="/donation" className="hover:text-green-500 transition-colors">Bağış</Link>
+                <Link
+                  href="/donation"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  Bağış
+                </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-green-500 transition-colors">İletişim</Link>
+                <Link
+                  href="/contact"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  İletişim
+                </Link>
               </li>
             </ul>
           </div>
