@@ -30,7 +30,7 @@ export default function Contact() {
       id="contact"
       className="container flex flex-col items-start lg:items-center gap-3 py-8 lg:py-32"
     >
-      <motion.p className="text-4xl lg:text-6xl font-bold" variants={item}>Bize Ulasin</motion.p>
+      <motion.p className="text-4xl lg:text-6xl font-bold" variants={item}>Bize Ulaşın</motion.p>
       <motion.p className="" variants={item}>
         Her türlü soru, öneri ve bilgi için bizimle telefon veya e-posta yoluyla
         iletişime geçebilirsiniz.

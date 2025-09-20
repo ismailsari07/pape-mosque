@@ -90,10 +90,31 @@ export default function Donation() {
     defaultValues: { email: "", amount: "", mode: "payment" },
   });
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: /api/checkout'a bağlanılacak
-    console.log("Form (stub):", form.getValues(), { selectedFund });
+    const { amount, email, mode } = form.getValues();
+
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Idempotency-Key": crypto.randomUUID(),
+        },
+        body: JSON.stringify({ amount: Math.round(Number(amount) * 100), fund: selectedFund, email, mode }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      if (!res.ok) throw new Error(data?.error ?? "Checkout error");
+
+      // API { url: session.url } döndürüyor → yönlendir
+      if (data?.url) window.location.assign(data.url);
+      else throw new Error("redirect URL missing");
+    } catch (e: any) {
+      alert(e?.message ?? "Unknown error");
+    } finally {
+    }
   }
 
   return (
@@ -106,7 +127,7 @@ export default function Donation() {
       className="container flex flex-col items-center gap-3 py-8 lg:py-32 lg:text-center"
     >
       <motion.p className="text-4xl md:text-6xl font-bold" variants={item}>
-        Bagis
+        Bağış
       </motion.p>
       <motion.p className="text-lg text-center" variants={item}>
         Sadaka ve zekâtlarını camimiz üzerinden yapmak isteyenler ile camimizin
@@ -117,7 +138,7 @@ export default function Donation() {
       <div className="flex flex-col lg:flex-row justify-between items-center gap-12 mt-10">
         <div className="md:w-2/5 flex flex-col items-start lg:items-center gap-3">
           <motion.p className="text-4xl md:text-6xl font-bold" variants={item}>
-            Camii Yardimi
+            Cami Yardımı
           </motion.p>
           <motion.p className="font-semibold" variants={item}>
             Camimizin bakım, hizmet ve ihtiyaç giderleri için bağışınızı bu
@@ -125,7 +146,7 @@ export default function Donation() {
           </motion.p>
           <motion.div variants={item}>
             <Button size={"lg"} onClick={() => openFor("donation-mosque")}>
-              Camii Yardimi <ArrowRight size={20} />
+              Cami Yardımı <ArrowRight size={20} />
             </Button>
           </motion.div>
         </div>

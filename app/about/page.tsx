@@ -1,5 +1,5 @@
 "use client";
-import { PhoneIcon } from "lucide-react";
+import { PhoneIcon, MailIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
@@ -20,6 +20,41 @@ export default function About() {
       transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
+
+  type ContactType = "email" | "phone";
+
+  const gorevliler = [
+    {
+      name: "Ahmet Er",
+      title: "Başkan",
+      contactType: "phone" as ContactType,
+      contactText: "647 709 7219"
+    },
+    {
+      name: "Orhun Belir",
+      title: "Başkan Yardımcısı",
+      contactType: "email" as ContactType,
+      contactText: "info@papecami.com"
+    },
+    {
+      name: "Abdullah Abi",
+      title: "Mali İşler Sorumlusu",
+      contactType: "email" as ContactType,
+      contactText: "info@papecami.com"
+    },
+    {
+      name: "Yasemin Akbulut",
+      title: "Sekreter",
+      contactType: "email" as ContactType,
+      contactText: "info@papecami.com"
+    },
+    {
+      name: "Faruk Özkan",
+      title: "Din Görevlisi",
+      contactType: "phone" as ContactType,
+      contactText: "647 834 2000"
+    }
+  ];
 
   return (
     <motion.section
@@ -64,16 +99,26 @@ export default function About() {
         özveriyle görev yapan ana ekip üyelerimizi göstermektedir.
       </motion.p>
       <div className="flex gap-3 md:gap-10 flex-wrap">
-        {[1, 2, 3, 4, 5].map((x) => (
+        {gorevliler.map((gorevli, idx) => (
           <motion.div
-            key={x}
+            key={gorevli.name + idx}
             variants={item}
             className="border-2 border-amber-100 rounded-2xl p-3"
           >
-            <p className="font-bold text-xl">Ahmet Er</p>
-            <p className="text-muted-foreground mb-4">Baskan</p>
+            <p className="font-bold text-xl">{gorevli.name}</p>
+            <p className="text-muted-foreground mb-4">{gorevli.title}</p>
             <div className="flex gap-2 items-center">
-              <PhoneIcon size={16} /> <a href="#">437 443 9648</a>
+              {gorevli.contactType === "phone" ? (
+                <>
+                  <PhoneIcon size={16} />
+                  <a href={`tel:${gorevli.contactText.replace(/[^+\d]/g, "")}`}>{gorevli.contactText}</a>
+                </>
+              ) : (
+                <>
+                  <MailIcon size={16} />
+                  <a href={`mailto:${gorevli.contactText}`}>{gorevli.contactText}</a>
+                </>
+              )}
             </div>
           </motion.div>
         ))}

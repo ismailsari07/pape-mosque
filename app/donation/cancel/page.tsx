@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 export default function CancelPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8">
@@ -6,9 +9,11 @@ export default function CancelPage() {
         Bağış işlemi iptal edildi. Tekrar denemek isterseniz bağış sayfasına
         dönebilirsiniz.
       </p>
-      <a href="/donation" className="mt-6 text-blue-600 underline">
-        Bağış sayfasına dön
-      </a>
+      <Button className="mt-6">
+        <Link href={"/"}>
+        Ana sayfaya dön
+        </Link>
+      </Button>
     </div>
   );
 }

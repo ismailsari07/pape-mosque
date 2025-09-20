@@ -39,9 +39,9 @@ export default function Hero() {
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
         <h1 className="text-5xl md:text-8xl md:px-24">
           <motion.span variants={item} className="text-green-500">
-            Turk Islam
+            Türk İslam
           </motion.span>
-          <br /> <motion.span variants={item}>Vakfi Kanada</motion.span>
+          <br /> <motion.span variants={item}>Vakfı Kanada</motion.span>
         </h1>
         <motion.p variants={item} className="px-0 text-center">
           Toplumumuza manevi gelişim, kültürel bağ ve hayatın her evresinde{" "}
