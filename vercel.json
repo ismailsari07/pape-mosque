@@ -1,0 +1,6 @@
+{
+  "crons": [{
+    "path": "/api/prayer/refresh?cron_secret=",
+    "schedule": "1 3 * * *"
+  }]
+}

@@ -1,6 +1,6 @@
-"use client";
-import { useEffect, useState } from "react";
+'use client'
 import { MoonIcon, SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const to12Hour = (t: any) =>
   new Date(`1970-01-01T${t}`)
@@ -8,12 +8,6 @@ const to12Hour = (t: any) =>
     .replace("AM", "a.m.")
     .replace("PM", "p.m.");
 
-type FetchState =
-  | { s: "idle" | "loading" }
-  | { s: "ok"; data: any }
-  | { s: "err"; msg: string };
-
-//****************************************************************************************************************************************
 type Item = {
   name: "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
   time: string;
@@ -35,7 +29,14 @@ const toMin = (hhmm: string) => {
   return h * 60 + m;
 };
 
+/**
+ * Toronto Saatine gore, Mevcut namaz vakti ve sonraki namaz vaktini ceker
+ * @param daily Günlük namaz vakitleri listesi
+ * @param nowHHMM Şu anki zaman "HH:MM" formatında
+ * @returns {current, next} Mevcut ve bir sonraki namaz vakti bilgileri
+ */
 function getCurrentAndNext(daily: Item[], nowHHMM: string) {
+  debugger;
   const now = toMin(nowHHMM);
 
   // Sadece namazlar (Sunrise hariç) için indeks ve zaman listesi
@@ -57,42 +58,37 @@ function getCurrentAndNext(daily: Item[], nowHHMM: string) {
     next: { ...next, trName: trName[next.name] },
   };
 }
-//****************************************************************************************************************************************
+
+export const dynamic = "force-dynamic"; 
+type TodayResponse = {
+  date: string;
+  lastUpdated: string;
+  status: "ok" | "error" | "warning";
+  source: "cache";
+  payload: any; 
+};
+
+async function getToday(): Promise<TodayResponse> {
+  const res = await fetch(`/api/prayer/today`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error(`Failed to load today: ${res.status}`);
+
+  return res.json();
+}
 
 export default function PrayerTimes() {
-  const [st, setSt] = useState<FetchState>({ s: "idle" });
+    const [data, setData] = useState<any>(null);
+     useEffect(() => {
 
-  const load = async () => {
-    setSt({ s: "loading" });
-    try {
-      const r = await fetch("/api/prayer-times", { cache: "no-store" });
-      const j = await r.json();
-      if (!r.ok) throw new Error(j?.error || `HTTP ${r.status}`);
-      setSt({ s: "ok", data: j });
-    } catch (e: any) {
-      setSt({ s: "err", msg: e?.message ?? "Unknown error" });
-    }
-  };
-
-  useEffect(() => {
-    load();
+     fetch("/api/prayer/today", { cache: "no-store" })
+      .then(r => r.json())
+      .then(setData)
+      .catch(console.error);
   }, []);
 
-  if (st.s === "idle" || st.s === "loading")
-    return <div className="rounded-xl border p-4 text-sm">Veri Cekiliyor.</div>;
-
-  if (st.s === "err")
-    return (
-      <div className="rounded-xl border p-4 text-sm">
-        <div className="text-red-600">Hata: {st.msg}</div>
-        <button
-          onClick={load}
-          className="mt-2 rounded border px-3 py-1 text-sm hover:bg-black/5"
-        >
-          Tekrar dene
-        </button>
-      </div>
-    );
+  if (!data?.payload) return <div>Yükleniyor…</div>;
 
   const torontoHHMM = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Toronto",
@@ -101,7 +97,7 @@ export default function PrayerTimes() {
     hour12: false,
   }).format(new Date());
   const { current, next } = getCurrentAndNext(
-    st.data.dailyPrayerTimes,
+    data.payload.dailyPrayerTimes,
     torontoHHMM,
   );
 
@@ -119,15 +115,15 @@ export default function PrayerTimes() {
             <div className="w-1/2 flex flex-col bg-[#fbf2ee] text-[#1b1522] rounded-2xl p-4">
               <div className="text-lg">Şu Anki Vakit</div>
               <div className="text-2xl font-semibold text-[#e87539]">
-                {current.trName}
+                {current?.trName}
               </div>
-              <div className="text-4xl font-bold">{current.time}</div>
+              <div className="text-4xl font-bold">{current?.time}</div>
               <div className="text-lg">
                 Bitiş Saati -{" "}
                 <span className="font-semibold">
-                  {current.name == "Fajr"
-                    ? st.data.dailyPrayerTimes[1].time
-                    : next.time}
+                  {current?.name === "Fajr"
+                    ? data.payload.dailyPrayerTimes[1].time
+                    : next?.time}
                 </span>
               </div>
             </div>
@@ -135,11 +131,11 @@ export default function PrayerTimes() {
             <div className="w-1/2 flex flex-col bg-[#fbf2ee] text-[#1b1522] rounded-2xl p-4">
               <div className="text-lg">Sonraki Namaz</div>
               <div className="text-2xl font-semibold text-[#e87539]">
-                {next.trName}
+                {next?.trName}
               </div>
-              <div className="text-4xl font-bold">{next.time}</div>
+              <div className="text-4xl font-bold">{next?.time}</div>
               <div className="text-lg">
-                Cemaat - <span className="font-semibold">{next.iqamah}</span>
+                Cemaat - <span className="font-semibold">{next?.iqamah}</span>
               </div>
             </div>
           </div>
@@ -148,21 +144,21 @@ export default function PrayerTimes() {
             <div className="flex flex-col text-lg text-center">
               <div>Güneş Doğuşu</div>
               <div className="font-semibold">
-                {to12Hour(st.data.dailyPrayerTimes[1].time)}
+                {to12Hour(data.payload.dailyPrayerTimes[1].time)}
               </div>
             </div>
             <hr className="h-20 w-0.5 bg-gray-300" />
             <div className="flex flex-col text-lg text-center">
               <div>Öğle Vakti</div>
               <div className="font-semibold">
-                {to12Hour(st.data.dailyPrayerTimes[2].time)}
+                {to12Hour(data.payload.dailyPrayerTimes[2].time)}
               </div>
             </div>
             <hr className="h-20 w-0.5 bg-gray-300" />
             <div className="flex flex-col text-lg text-center">
               <div>Güneş Batışı</div>
               <div className="font-semibold">
-                {to12Hour(st.data.dailyPrayerTimes[4].time)}
+                {to12Hour(data.payload.dailyPrayerTimes[4].time)}
               </div>
             </div>
           </div>
@@ -171,7 +167,7 @@ export default function PrayerTimes() {
             <div>Cumaa</div>
             <span>Saati - </span>
             <span className="font-extrabold">
-              {st.data.jumaaPrayerTime} p.m
+              {data.payload.jumaaPrayerTime} p.m
             </span>
           </div>
         </div>
@@ -190,9 +186,9 @@ export default function PrayerTimes() {
               <span>Sabah</span>
             </div>
             <div className="w-32">
-              {to12Hour(st.data.dailyPrayerTimes[0].time)}
+              {to12Hour(data.payload.dailyPrayerTimes[0].time)}
             </div>
-            <div className="w-32">{st.data.dailyPrayerTimes[0].iqamah} a.m</div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[0].iqamah} a.m</div>
           </div>
 
           {/* Öğle Namazı */}
@@ -202,9 +198,9 @@ export default function PrayerTimes() {
               <span>Öğle</span>
             </div>
             <div className="w-32">
-              {to12Hour(st.data.dailyPrayerTimes[2].time)}
+              {to12Hour(data.payload.dailyPrayerTimes[2].time)}
             </div>
-            <div className="w-32">{st.data.dailyPrayerTimes[2].iqamah} p.m</div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[2].iqamah} p.m</div>
           </div>
 
           {/* İkindi Namazı */}
@@ -214,9 +210,9 @@ export default function PrayerTimes() {
               <span>İkindi</span>
             </div>
             <div className="w-32">
-              {to12Hour(st.data.dailyPrayerTimes[3].time)}
+              {to12Hour(data.payload.dailyPrayerTimes[3].time)}
             </div>
-            <div className="w-32">{st.data.dailyPrayerTimes[3].iqamah} p.m</div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[3].iqamah} p.m</div>
           </div>
 
           {/* Akşam Namazı */}
@@ -226,9 +222,9 @@ export default function PrayerTimes() {
               <span>Akşam</span>
             </div>
             <div className="w-32">
-              {to12Hour(st.data.dailyPrayerTimes[4].time)}
+              {to12Hour(data.payload.dailyPrayerTimes[4].time)}
             </div>
-            <div className="w-32">{st.data.dailyPrayerTimes[4].iqamah} p.m</div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[4].iqamah} p.m</div>
           </div>
 
           {/* Yatsı Namazı */}
@@ -238,9 +234,9 @@ export default function PrayerTimes() {
               <span>Yatsı</span>
             </div>
             <div className="w-32">
-              {to12Hour(st.data.dailyPrayerTimes[5].time)}
+              {to12Hour(data.payload.dailyPrayerTimes[5].time)}
             </div>
-            <div className="w-32">{st.data.dailyPrayerTimes[5].iqamah} p.m</div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[5].iqamah} p.m</div>
           </div>
         </div>
       </div>
