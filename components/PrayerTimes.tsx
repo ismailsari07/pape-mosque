@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { MoonIcon, SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -59,13 +59,13 @@ function getCurrentAndNext(daily: Item[], nowHHMM: string) {
   };
 }
 
-export const dynamic = "force-dynamic"; 
+export const dynamic = "force-dynamic";
 type TodayResponse = {
   date: string;
   lastUpdated: string;
   status: "ok" | "error" | "warning";
   source: "cache";
-  payload: any; 
+  payload: any;
 };
 
 async function getToday(): Promise<TodayResponse> {
@@ -79,11 +79,10 @@ async function getToday(): Promise<TodayResponse> {
 }
 
 export default function PrayerTimes() {
-    const [data, setData] = useState<any>(null);
-     useEffect(() => {
-
-     fetch("/api/prayer/today", { cache: "no-store" })
-      .then(r => r.json())
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    fetch("/api/prayer/today", { cache: "no-store" })
+      .then((r) => r.json())
       .then(setData)
       .catch(console.error);
   }, []);
@@ -188,7 +187,9 @@ export default function PrayerTimes() {
             <div className="w-32">
               {to12Hour(data.payload.dailyPrayerTimes[0].time)}
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[0].iqamah} a.m</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[0].iqamah} a.m
+            </div>
           </div>
 
           {/* Öğle Namazı */}
@@ -200,7 +201,9 @@ export default function PrayerTimes() {
             <div className="w-32">
               {to12Hour(data.payload.dailyPrayerTimes[2].time)}
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[2].iqamah} p.m</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[2].iqamah} p.m
+            </div>
           </div>
 
           {/* İkindi Namazı */}
@@ -212,7 +215,9 @@ export default function PrayerTimes() {
             <div className="w-32">
               {to12Hour(data.payload.dailyPrayerTimes[3].time)}
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[3].iqamah} p.m</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[3].iqamah} p.m
+            </div>
           </div>
 
           {/* Akşam Namazı */}
@@ -224,7 +229,9 @@ export default function PrayerTimes() {
             <div className="w-32">
               {to12Hour(data.payload.dailyPrayerTimes[4].time)}
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[4].iqamah} p.m</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[4].iqamah} p.m
+            </div>
           </div>
 
           {/* Yatsı Namazı */}
@@ -236,7 +243,9 @@ export default function PrayerTimes() {
             <div className="w-32">
               {to12Hour(data.payload.dailyPrayerTimes[5].time)}
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[5].iqamah} p.m</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[5].iqamah} p.m
+            </div>
           </div>
         </div>
       </div>

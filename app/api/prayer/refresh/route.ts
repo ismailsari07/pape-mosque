@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-export const runtime = "nodejs"; // service role anahtarını kullanacağımız için node runtime
+export const runtime = "nodejs";
 
 const PRAYER_API_URL = process.env.PRAYER_API_URL!;
 const CRON_SECRET = process.env.CRON_SECRET!;
@@ -18,9 +18,9 @@ function todayInToronto(): string {
     day: "2-digit",
   }).formatToParts(new Date());
 
-  const y = parts.find(p => p.type === "year")!.value;
-  const m = parts.find(p => p.type === "month")!.value;
-  const d = parts.find(p => p.type === "day")!.value;
+  const y = parts.find((p) => p.type === "year")!.value;
+  const m = parts.find((p) => p.type === "month")!.value;
+  const d = parts.find((p) => p.type === "day")!.value;
   return `${y}-${m}-${d}`; // yyyy-MM-dd
 }
 
@@ -36,7 +36,7 @@ async function fetchWithTimeout(url: string, ms = 60000) {
       headers: {
         "Cache-Control": "no-cache",
         "User-Agent": "prayer-refresh/1.0",
-        "Accept": "application/json",
+        Accept: "application/json",
       },
     });
     clearTimeout(id);
@@ -62,7 +62,6 @@ async function fetchWithRetry(url: string, timeoutsMs = [45000, 60000, 90000]) {
   }
   throw lastErr ?? new Error("fetch failed");
 }
-
 
 function minimalValidatePayload(payload: unknown) {
   if (payload && typeof payload === "object") return true; // yalın doğrulama: boş/undefined olmasın
@@ -92,12 +91,14 @@ export async function POST(req: Request) {
   try {
     // 1) Güvenlik: secret header kontrolü
     const provided = extractCronSecret(req);
-    if (!provided || provided !== CRON_SECRET) {
-      return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+    if (!CRON_SECRET) {
+      return NextResponse.json(
+        { error: "server misconfig: CRON_SECRET missing" },
+        { status: 500 },
+      );
     }
 
-    const secret = req.headers.get("x-cron-secret");
-    if (!secret || secret !== CRON_SECRET) {
+    if (provided !== CRON_SECRET) {
       return NextResponse.json({ error: "unauthorized" }, { status: 401 });
     }
 
@@ -110,7 +111,7 @@ export async function POST(req: Request) {
     if (!res.ok) {
       return NextResponse.json(
         { error: "upstream_failed", status: res.status },
-        { status: 502 }
+        { status: 502 },
       );
     }
 
@@ -123,26 +124,30 @@ export async function POST(req: Request) {
 
     // 5) Supabase'e upsert
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-    const { error } = await supabase
-      .from("prayer_cache")
-      .upsert(
-        {
-          date,
-          payload,
-          fetched_at: new Date().toISOString(),
-          status: "ok",
-        },
-        { onConflict: "date" }
-      );
+    const { error } = await supabase.from("prayer_cache").upsert(
+      {
+        date,
+        payload,
+        fetched_at: new Date().toISOString(),
+        status: "ok",
+      },
+      { onConflict: "date" },
+    );
 
     if (error) {
-      return NextResponse.json({ error: "db_upsert_failed", detail: error.message }, { status: 500 });
+      return NextResponse.json(
+        { error: "db_upsert_failed", detail: error.message },
+        { status: 500 },
+      );
     }
 
     const tookMs = Date.now() - startedAt;
     return NextResponse.json({ ok: true, date, tookMs });
   } catch (err: any) {
     // AbortError vs diğer hatalar aynı yerden döner
-    return NextResponse.json({ error: "internal_error", detail: String(err?.message ?? err) }, { status: 500 });
+    return NextResponse.json(
+      { error: "internal_error", detail: String(err?.message ?? err) },
+      { status: 500 },
+    );
   }
 }

@@ -9,11 +9,21 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="flex flex-col items-start gap-3 px-4 py-12 lg:p-24">
       <div className="container flex flex-col items-start gap-3">
+        <Link href="/" className="text-bold text-2xl">
+          <Image
+            src={"/logo.jpeg"}
+            width={175}
+            height={175}
+            alt="logo"
+            className="rounded-2xl border-2 border-amber-50 mb-5"
+          />
+        </Link>
         <h2 className="text-5xl font-semibold">Türk İslam Vakfı Kanada</h2>
         <p className="md:w-1/3 text-lg">
           Herkes, dualarımıza, programlarımıza ve topluluk buluşmalarımıza

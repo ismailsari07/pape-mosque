@@ -12,12 +12,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
     <nav className="flex justify-between md:justify-evenly items-center p-6 text-lg">
       <Link href="/" className="text-bold text-2xl">
-        Türk İslam Vakfı
+        <Image
+          src={"/logo.jpeg"}
+          width={75}
+          height={75}
+          alt="logo"
+          className="rounded-2xl border-2 border-amber-50"
+        />
       </Link>
 
       <div className="hidden md:flex items-center gap-4">
