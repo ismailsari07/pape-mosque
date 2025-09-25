@@ -135,6 +135,7 @@ export async function POST(req: Request) {
     );
 
     if (error) {
+      console.error("DB insert failed:", error);
       return NextResponse.json(
         { error: "db_upsert_failed", detail: error.message },
         { status: 500 },
