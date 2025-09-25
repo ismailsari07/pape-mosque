@@ -151,3 +151,9 @@ export async function POST(req: Request) {
     );
   }
 }
+
+// app/api/prayer/refresh/route.ts
+export async function GET(req: Request) {
+  // Cron GET ile gelir → aynı doğrulamayı kullan
+  return POST(req); // POST'taki aynı mantığı çalıştır
+}
