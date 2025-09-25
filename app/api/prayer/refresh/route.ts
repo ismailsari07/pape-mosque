@@ -99,6 +99,13 @@ export async function POST(req: Request) {
     }
 
     if (provided !== CRON_SECRET) {
+      console.log(
+        "cron provided len:",
+        provided?.length,
+        "expected len:",
+        process.env.CRON_SECRET?.length,
+      );
+
       return NextResponse.json({ error: "unauthorized" }, { status: 401 });
     }
 
