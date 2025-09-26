@@ -9,19 +9,19 @@ const services = [
     title: "Cenaze Hizmetleri",
     description:
       "İslami cenaze düzenlemeleri, defin işlemleri ve kayıp zamanlarında manevi destek sağlıyoruz.",
-    imageUrl: "/service1.jpg",
+    imageUrl: "/service-funeral.jpeg",
   },
   {
     title: "Kur'an Dersleri",
     description:
       "Deneyimli hocalardan huzurlu ve saygılı bir ortamda Kur’an okumayı ve anlamayı öğrenin.",
-    imageUrl: "/service2.jpg",
+    imageUrl: "/service-lesson.jpeg",
   },
   {
     title: "Nikah Hizmetleri",
     description:
       "İslami nikah törenleri ve evlilik desteği sunuyor, inanç ve geleneklere bağlı kalıyoruz.",
-    imageUrl: "/service3.jpg",
+    imageUrl: "/service-married.jpeg",
   },
   {
     title: "Ramazan İftar Yemekleri",
