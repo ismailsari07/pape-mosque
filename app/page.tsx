@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Hero from "@/components/Hero";
 import News from "@/components/News";
 import PrayerTimes from "@/components/PrayerTimes";
