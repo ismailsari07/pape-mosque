@@ -2,12 +2,6 @@
 import { MoonIcon, SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const to12Hour = (t: any) =>
-  new Date(`1970-01-01T${t}`)
-    .toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
-    .replace("AM", "a.m.")
-    .replace("PM", "p.m.");
-
 type Item = {
   name: "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
   time: string;
@@ -143,21 +137,21 @@ export default function PrayerTimes() {
             <div className="flex flex-col text-lg text-center">
               <div>Güneş Doğuşu</div>
               <div className="font-semibold">
-                {to12Hour(data.payload.dailyPrayerTimes[1].time)}
+                {data.payload.dailyPrayerTimes[1].time}
               </div>
             </div>
             <hr className="h-20 w-0.5 bg-gray-300" />
             <div className="flex flex-col text-lg text-center">
               <div>Öğle Vakti</div>
               <div className="font-semibold">
-                {to12Hour(data.payload.dailyPrayerTimes[2].time)}
+                {data.payload.dailyPrayerTimes[2].time}
               </div>
             </div>
             <hr className="h-20 w-0.5 bg-gray-300" />
             <div className="flex flex-col text-lg text-center">
               <div>Güneş Batışı</div>
               <div className="font-semibold">
-                {to12Hour(data.payload.dailyPrayerTimes[4].time)}
+                {data.payload.dailyPrayerTimes[4].time}
               </div>
             </div>
           </div>
@@ -184,9 +178,7 @@ export default function PrayerTimes() {
               <SunriseIcon className="text-[#e87539]" />
               <span>Sabah</span>
             </div>
-            <div className="w-32">
-              {to12Hour(data.payload.dailyPrayerTimes[0].time)}
-            </div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[0].time}</div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[0].iqamah} a.m
             </div>
@@ -198,9 +190,7 @@ export default function PrayerTimes() {
               <SunIcon className="text-[#e87539]" />
               <span>Öğle</span>
             </div>
-            <div className="w-32">
-              {to12Hour(data.payload.dailyPrayerTimes[2].time)}
-            </div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[2].time}</div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[2].iqamah} p.m
             </div>
@@ -212,9 +202,7 @@ export default function PrayerTimes() {
               <SunIcon className="text-[#e87539]" />
               <span>İkindi</span>
             </div>
-            <div className="w-32">
-              {to12Hour(data.payload.dailyPrayerTimes[3].time)}
-            </div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[3].time}</div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[3].iqamah} p.m
             </div>
@@ -226,9 +214,7 @@ export default function PrayerTimes() {
               <SunsetIcon className="text-[#e87539]" />
               <span>Akşam</span>
             </div>
-            <div className="w-32">
-              {to12Hour(data.payload.dailyPrayerTimes[4].time)}
-            </div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[4].time}</div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[4].iqamah} p.m
             </div>
@@ -240,9 +226,7 @@ export default function PrayerTimes() {
               <MoonIcon className="text-[#e87539]" />
               <span>Yatsı</span>
             </div>
-            <div className="w-32">
-              {to12Hour(data.payload.dailyPrayerTimes[5].time)}
-            </div>
+            <div className="w-32">{data.payload.dailyPrayerTimes[5].time}</div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[5].iqamah} p.m
             </div>
