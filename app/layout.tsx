@@ -50,7 +50,15 @@ export const metadata: Metadata = {
       "Turkish Islamic Center Canada (Pape Camii), Toronto’da 24 saat açık ibadet imkânı, Kur’an dersleri, cemaat buluşmaları ve bağış bilgileri sunar.",
     images: ["/og.jpeg"],
   },
-  // TODO: Tema rengi ve favicon(lar) kullanıcı isteği gereği şimdilik eklenmedi (bkz. açıklama #14).
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  manifest: "/site.webmanifest",
 };
 
 // -------- JSON-LD (Schema.org) --------

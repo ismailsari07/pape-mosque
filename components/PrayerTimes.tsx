@@ -30,7 +30,6 @@ const toMin = (hhmm: string) => {
  * @returns {current, next} Mevcut ve bir sonraki namaz vakti bilgileri
  */
 function getCurrentAndNext(daily: Item[], nowHHMM: string) {
-  debugger;
   const now = toMin(nowHHMM);
 
   // Sadece namazlar (Sunrise hariç) için indeks ve zaman listesi
