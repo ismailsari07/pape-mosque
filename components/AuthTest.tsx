@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "@/lib/supabase/client.ts";
+import { supabase } from "@/lib/supabase/client";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useEffect } from "react";
 

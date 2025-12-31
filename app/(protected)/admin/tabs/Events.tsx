@@ -129,8 +129,7 @@ export default function EventsPage() {
                       disabled={
                         deleteMutation.isPending && deleteId === event.id
                       }
-                      className="text-red-600 hover:text-red-900 disabled:opacity-50"
-                      disabled
+                      className="text-red-600 hover:text-red-900 disabled:opacity-50 pointer-events-none"
                     >
                       {deleteMutation.isPending && deleteId === event.id
                         ? "Siliniyor..."

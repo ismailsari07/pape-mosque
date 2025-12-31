@@ -1,16 +1,13 @@
-import Events from "./tabs/Events";
-import Donations from "./tabs/Donations";
-import Announcements from "./tabs/Announcements";
-import { use } from "react";
+import { Suspense } from "react";
+import AdminClient from "./AdminClient";
+import AdminShell from "../AdminShell";
 
-type PageProps = {
-  searchParams: Promise<{ tab?: string }>;
-};
-
-export default function AdminDashboard({ searchParams }: PageProps) {
-  const { tab = "events" } = use(searchParams);
-
-  if (tab === "donations") return <Donations />;
-  if (tab === "announcements") return <Announcements />;
-  return <Events />;
+export default function AdminPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AdminShell>
+        <AdminClient />
+      </AdminShell>
+    </Suspense>
+  );
 }

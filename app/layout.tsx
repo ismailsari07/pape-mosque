@@ -4,6 +4,9 @@ import { Lato, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { AuthProvider } from "@/components/AuthProvider";
+import { websiteJsonLd } from "@/lib/seo/websiteJsonLd";
+import { mosqueJsonLd } from "@/lib/seo/mosqueJsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo/breadcrumbJsonLd";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-sans",
@@ -59,84 +62,6 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
-};
-
-// -------- JSON-LD (Schema.org) --------
-export const websiteJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  url: "https://papemosque.ca/",
-  name: "Turkish Islamic Center Canada",
-  inLanguage: "tr",
-  publisher: {
-    "@type": "Organization",
-    name: "Turkish Islamic Center Canada",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://papemosque.ca/logo.jpeg",
-    },
-  },
-};
-
-export const mosqueJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Mosque",
-  name: "Turkish Islamic Center Canada",
-  url: "https://papemosque.ca/",
-  email: "info@papecami.com",
-  telephone: "+1-647-834-2000",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "336 Pape Ave",
-    addressLocality: "Toronto",
-    addressRegion: "ON",
-    postalCode: "M4M 2W7",
-    addressCountry: "CA",
-  },
-  image: "https://papemosque.ca/og.jpeg",
-  logo: "https://papemosque.ca/logo.jpeg",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "00:00",
-      closes: "23:59",
-    },
-  ],
-  foundingDate: "1983-04",
-  hasMap: "https://maps.app.goo.gl/32uuUt7L7MBrpKUT8",
-  areaServed: "Toronto, Ontario, Canada",
-  potentialAction: {
-    "@type": "DonateAction",
-    target: "https://papemosque.ca/donation",
-  },
-};
-
-export const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Ana Sayfa",
-      item: "https://papemosque.ca/",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Bağış",
-      item: "https://papemosque.ca/donation",
-    },
-  ],
 };
 
 export default function RootLayout({
