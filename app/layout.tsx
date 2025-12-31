@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Lato, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Providers } from "./providers";
+import { AuthProvider } from "@/components/AuthProvider";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-sans",
@@ -149,9 +149,9 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${bricolageGrotesque.variable} antialiased font-sans`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <AuthProvider>{children}</AuthProvider>
+        </Providers>
 
         <Script
           id="ld-website"

@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 
 const PRAYER_API_URL = process.env.PRAYER_API_URL!;
 const CRON_SECRET = process.env.CRON_SECRET!;
-const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 const TZ = "America/Toronto";

@@ -57,11 +57,11 @@ export default function Footer() {
               </li>
               <li className="flex gap-2">
                 <PhoneCall />
-                <a href="tel:4374439648">437 443 9648</a>
+                <a href="tel:6478342000">647 834 2000</a>
               </li>
               <li className="flex gap-2">
                 <MailIcon />
-                <a href="mailto:iletisim@papecami.com">iletisim@papecami.com</a>
+                <a href="emailto:info@papecami.com">info@papecami.com</a>
               </li>
             </ul>
           </div>
