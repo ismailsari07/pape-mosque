@@ -36,12 +36,12 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-neutral-950">
-      <div className="min-h-screen mx-auto p-5 flex gap-3">
+      <div className="min-h-screen mx-auto p-5 flex gap-3 md:w-8/10">
         {/* SideBar */}
         <div className="w-80 flex flex-col items-start bg-neutral-900 border border-neutral-800/70 shadow rounded-lg p-5 text-neutral-50">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-3xl font-bold">Dashboard</h1>
+            <h1 className="text-xl font-bold">Turkish Islamic Trust</h1>
             <p className="font-semibol text-blue-600/90 mt-2">{user?.email}</p>
           </div>
 
@@ -54,8 +54,8 @@ export default function AdminLayout({
                   key={tab.id}
                   onClick={() => router.push(`/admin?tab=${tab.id}`)}
                   className={`
-              px-2 py-2 text-neutral-50 w-full text-start
-              ${activeTab === tab.id ? "bg-neutral-500/20 rounded-lg" : ""}
+              px-4 py-2 text-neutral-50 w-full text-start
+            ${activeTab === tab.id ? "bg-neutral-50 text-neutral-900 rounded-lg font-semibold" : ""}
             `}
                 >
                   {tab.label}

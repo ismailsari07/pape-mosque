@@ -1,10 +1,16 @@
+import { DonationWithFund } from "@/app/(protected)/admin/donations/types";
 import { supabase } from "@/lib/supabase/client";
 
 // Tüm bağışları çek (Admin için)
-export async function getAllDonations() {
+export async function getAllDonations(): Promise<DonationWithFund[]> {
   const { data, error } = await supabase
     .from("donations")
-    .select("*")
+    .select(
+      `
+						*,
+						funds (code, label,color)
+						`,
+    )
     .order("created_at", { ascending: false });
 
   if (error) throw error;
@@ -27,7 +33,7 @@ export async function getDonation(id: string) {
 export async function getDonationStats() {
   const { data, error } = await supabase
     .from("donations")
-    .select("amount_cents, fund");
+    .select("amount_cents, fund_code");
 
   if (error) throw error;
 
@@ -36,8 +42,8 @@ export async function getDonationStats() {
 
   // Fon bazında
   const byFund = data.reduce((acc: any, d) => {
-    if (!acc[d.fund]) acc[d.fund] = 0;
-    acc[d.fund] += d.amount_cents;
+    if (!acc[d.fund_code]) acc[d.fund_code] = 0;
+    acc[d.fund_code] += d.amount_cents;
     return acc;
   }, {});
 
