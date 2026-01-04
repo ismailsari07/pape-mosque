@@ -8,7 +8,7 @@ import { columns } from "../donations/table/columns";
 import { formatCurrency } from "../donations/helper";
 
 export default function Donations() {
-  const { data: donations, isLoading } = useQuery({
+  const { data: donations = [], isLoading } = useQuery({
     queryKey: ["admin-donations"],
     queryFn: getAllDonations,
   });

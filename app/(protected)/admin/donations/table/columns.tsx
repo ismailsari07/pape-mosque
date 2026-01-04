@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DonationWithFUnd } from "../types";
+import { DonationWithFund } from "../types";
 import { formatCurrency } from "../helper";
 import { formatDate } from "../helper";
 import { formatTime } from "../helper";
