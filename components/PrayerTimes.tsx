@@ -95,7 +95,7 @@ export default function PrayerTimes() {
         {/* Prayer Times */}
         <div className="w-full md:w-[50%] flex flex-col bg-[#fbf2ee] text-[#1b1522] gap-3 p-1 md:p-4 rounded-2xl">
           {/* Header */}
-          <div className="flex justify-between items-center text-base md:text-2xl font-semibold border-b border-gray-300 rounded-2xl p-2 px-10 border border-gray-300">
+          <div className="flex justify-between items-center text-base md:text-2xl font-semibold  rounded-2xl p-2 px-10 border border-[#1d1d1f]">
             <div>Namaz</div>
             <div className="mr-10">Ezan</div>
             <div>İkame</div>

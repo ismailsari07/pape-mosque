@@ -28,7 +28,7 @@ export default function Navbar() {
       </Link>
 
       <div className="hidden md:flex items-center gap-4">
-        <Link href={"/about"}>Dernegimiz</Link>
+        <Link href={"/about"}>Derneğimiz</Link>
         <Link href={"/service"}>Hizmetlerimiz</Link>
         <Link href={"/donation"}>Bağış</Link>
         <Link href={"/contact"}>İletişim</Link>

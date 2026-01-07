@@ -38,7 +38,7 @@ export default function Hero() {
     >
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
         <h1 className="text-5xl md:text-8xl md:px-24">
-          <motion.span variants={item} className="text-green-500">
+          <motion.span variants={item} className="text-[#E30A17]">
             Kanada Türk
           </motion.span>
           <br /> <motion.span variants={item}>İslam Vakfı</motion.span>
