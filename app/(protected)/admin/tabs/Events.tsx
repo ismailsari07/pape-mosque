@@ -1,56 +1,96 @@
 "use client";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAllEvents, deleteEvent } from "@/lib/api/events";
-import Link from "next/link";
 import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getAllEvents, getEvent } from "@/lib/api/events";
+import { DataTable } from "../components/data-table";
+import { createEventColumns } from "../events/table/columns";
+import { EventEditSheet } from "../events/components/EventEditSheet";
+import { EventUpdate } from "../events/types";
+import { EventFormValues } from "../events/schema/eventForm.schema";
+
+function mapEventToFormValues(event: EventUpdate): EventFormValues | undefined {
+  return {
+    title: event.title,
+    description: event.description,
+    day: event.day,
+    time: event.time,
+    phone: event.phone ?? "",
+    is_active: event.is_active,
+    is_featured: event.is_featured,
+    is_recurring: event.is_recurring,
+  };
+}
 
 export default function EventsPage() {
-  const queryClient = useQueryClient();
-  const [deleteId, setDeleteId] = useState<string | null>(null);
+  // const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const { data: events, isLoading } = useQuery({
-    queryKey: ["admin-events"],
+  // const handleDelete = (id: string) => {
+  //   if (window.confirm("Bu etkinliği silmek istediğinizden emin misiniz?")) {
+  //     deleteMutation.mutate(id);
+  //   }
+  // };
+
+  // States
+  const [selectedEventId, setSelectedEventId] = useState<string | null>("");
+  const [editSheet, setEditSheet] = useState(false);
+
+  // Tanstack Process
+  const queryClient = useQueryClient();
+  const { data: eventsTable = [], isLoading } = useQuery({
+    queryKey: ["table-events"],
     queryFn: getAllEvents,
   });
 
-  const deleteMutation = useMutation({
-    mutationFn: deleteEvent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin-events"] });
-      setDeleteId(null);
+  const { data: eventData } = useQuery({
+    queryKey: ["event-data", selectedEventId],
+    queryFn: () => getEvent(selectedEventId!),
+  });
+  const formDefaultValues: EventFormValues | undefined = eventData
+    ? mapEventToFormValues(eventData)
+    : undefined;
+
+  // Create Columns
+  const columns = createEventColumns({
+    onEdit: (id: string) => {
+      setSelectedEventId(id);
+
+      setEditSheet(true);
     },
   });
-
-  const handleDelete = (id: string) => {
-    if (window.confirm("Bu etkinliği silmek istediğinizden emin misiniz?")) {
-      deleteMutation.mutate(id);
-    }
-  };
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-400"></div>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="space-y-6">
       {/* Header */}
-      <div className="mb-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bold ">Etkinlikler</h1>
-        {/*<Link
-          href="/admin/events/new"
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
-        >
-          + Yeni Etkinlik Ekle
-        </Link>*/}
+      <div>
+        <h1 className="text-2xl font-bold text-white">Events</h1>
+        <p className="text-neutral-400 mt-1">
+          Manage all events displayed on the public site.
+        </p>
       </div>
 
       {/* Events Table */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
-        {events && events.length > 0 ? (
+      <DataTable
+        columns={columns}
+        data={eventsTable}
+        renderToolbar={(table) => <></>}
+      />
+
+      <EventEditSheet
+        open={editSheet}
+        onOpenChange={setEditSheet}
+        defaultValues={formDefaultValues}
+      />
+
+      {/* Events Table */}
+      {/*events && events.length > 0 ? (
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -169,9 +209,6 @@ export default function EventsPage() {
                 + Yeni Etkinlik Ekle
               </Link>
             </div>*/}
-          </div>
-        )}
-      </div>
     </div>
   );
 }

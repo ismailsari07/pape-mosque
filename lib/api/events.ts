@@ -1,7 +1,8 @@
+import { EventRow, EventUpdate } from "@/app/(protected)/admin/events/types";
 import { supabase } from "@/lib/supabase/client";
 
 // Tüm etkinlikleri çek (Admin için - aktif + pasif)
-export async function getAllEvents() {
+export async function getAllEvents(): Promise<EventRow[]> {
   const { data, error } = await supabase
     .from("events")
     .select("*")
@@ -38,7 +39,7 @@ export async function getFeaturedEvents() {
 }
 
 // Tek etkinlik çek
-export async function getEvent(id: string) {
+export async function getEvent(id: string): Promise<EventUpdate> {
   const { data, error } = await supabase
     .from("events")
     .select("*")

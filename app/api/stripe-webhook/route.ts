@@ -15,6 +15,7 @@ const supabase = createClient(
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
   const sig = req.headers.get("stripe-signature");
+  console.log("event", "console geldi");
 
   let event: Stripe.Event;
   try {
@@ -31,15 +32,17 @@ export async function POST(req: NextRequest) {
 
     const record = {
       stripe_event_id: event.id,
-      fund: session.metadata?.fund ?? "unknown",
+      fund_code: session.metadata?.fund ?? "unknown",
       amount_cents: session.amount_total ?? 0,
       currency: (session.currency ?? "CAD").toUpperCase(),
       donor_email:
         session.customer_details?.email ?? session.customer_email ?? null,
       mode: session.mode ?? "payment",
     };
+    console.log("record", record);
 
     const { error } = await supabase.from("donations").insert(record);
+    console.log("error", error);
 
     if (error) {
       console.error("Supabase insert error:", error);

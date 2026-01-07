@@ -21,18 +21,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { funds } from "../data";
-import { DataTableFacetedFilter } from "../components/data-table-faceted-filter";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  renderToolbar: (table: any) => React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  renderToolbar,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -56,26 +55,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 gap-2">
-        <Input
-          placeholder="Filter emails..."
-          value={
-            (table.getColumn("donor_email")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("donor_email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm border-neutral-800 text-white bg-neutral-900"
-        />
-
-        {table.getColumn("fund_code") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("fund_code")}
-            title="Fon Türü"
-            options={funds}
-          />
-        )}
-      </div>
+      {renderToolbar(table)}
       <div className="overflow-hidden">
         <Table>
           <TableHeader>
@@ -126,6 +106,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"

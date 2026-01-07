@@ -3,7 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllDonations, getDonationStats } from "@/lib/api/donations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DataTable } from "../donations/table/data-table";
+import { DataTable } from "../components/data-table";
+import { DataTableToolbar } from "../donations/components/data-table-toolbar";
 import { columns } from "../donations/table/columns";
 import { formatCurrency } from "../donations/helper";
 
@@ -151,7 +152,11 @@ export default function Donations() {
       )}
 
       {/* Donations Table */}
-      <DataTable columns={columns} data={donations} />
+      <DataTable
+        columns={columns}
+        data={donations}
+        renderToolbar={(table) => <DataTableToolbar table={table} />}
+      />
     </div>
   );
 }

@@ -26,7 +26,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
-type Fund = "zekat" | "sadaka" | "donation-mosque" | "funeral";
+type Fund = "zekat" | "sadaka" | "general" | "cenaze";
 
 type FundMeta = {
   title: string;
@@ -42,11 +42,11 @@ const FUND_META_TR: Record<Fund, FundMeta> = {
     title: "Sadaka",
     description: "Sadakanızı camimiz aracılığıyla ihtiyaç sahiplerine iletme.",
   },
-  "donation-mosque": {
+  general: {
     title: "Cami Yardımı",
     description: "Camimizin bakım, hizmet ve ihtiyaç giderleri için bağış.",
   },
-  funeral: {
+  cenaze: {
     title: "Cenaze Hizmetleri",
     description: "Cenaze düzenlemeleri, defin ve ilgili hizmetler için bağış.",
   },
@@ -145,7 +145,7 @@ export default function Donation() {
             bölümden yapabilirsiniz.
           </motion.p>
           <motion.div variants={item}>
-            <Button size={"lg"} onClick={() => openFor("donation-mosque")}>
+            <Button size={"lg"} onClick={() => openFor("general")}>
               Cami Yardımı <ArrowRight size={20} />
             </Button>
           </motion.div>
@@ -198,7 +198,7 @@ export default function Donation() {
             yapabilirsiniz.
           </motion.p>
           <motion.div variants={item}>
-            <Button size={"lg"} onClick={() => openFor("funeral")}>
+            <Button size={"lg"} onClick={() => openFor("cenaze")}>
               Cenaze Fonu <ArrowRight size={20} />
             </Button>
           </motion.div>
