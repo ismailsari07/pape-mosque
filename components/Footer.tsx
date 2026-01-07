@@ -24,7 +24,7 @@ export default function Footer() {
             className="rounded-2xl border-2 border-amber-50 mb-5"
           />
         </Link>
-        <h2 className="text-5xl font-semibold">Türk İslam Vakfı Kanada</h2>
+        <h2 className="text-5xl font-semibold">Kanada Türk İslam Vakfı</h2>
         <p className="md:w-1/3 text-lg">
           Herkes, dualarımıza, programlarımıza ve topluluk buluşmalarımıza
           katılmaya davetlidir. Kapsayıcı manevi ailemizin sıcaklığını yaşayın.
