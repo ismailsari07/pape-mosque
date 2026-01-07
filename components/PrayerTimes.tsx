@@ -63,21 +63,21 @@ export default function PrayerTimes() {
             <div className="flex flex-col text-lg text-center">
               <div>Güneş Doğuşu</div>
               <div className="font-semibold">
-                {data.payload.dailyPrayerTimes[1].time}
+                {data.payload.dailyPrayerTimes[1].time + " a.m"}
               </div>
             </div>
             <hr className="h-20 w-0.5 bg-gray-300" />
             <div className="flex flex-col text-lg text-center">
               <div>Öğle Vakti</div>
               <div className="font-semibold">
-                {data.payload.dailyPrayerTimes[2].time}
+                {data.payload.dailyPrayerTimes[2].time + " p.m"}
               </div>
             </div>
             <hr className="h-20 w-0.5 bg-gray-300" />
             <div className="flex flex-col text-lg text-center">
               <div>Güneş Batışı</div>
               <div className="font-semibold">
-                {data.payload.dailyPrayerTimes[4].time}
+                {data.payload.dailyPrayerTimes[4].time + " p.m"}
               </div>
             </div>
           </div>
@@ -95,9 +95,9 @@ export default function PrayerTimes() {
         {/* Prayer Times */}
         <div className="w-full md:w-[50%] flex flex-col bg-[#fbf2ee] text-[#1b1522] gap-3 p-1 md:p-4 rounded-2xl">
           {/* Header */}
-          <div className="flex justify-between items-center text-base md:text-lg font-extrabold border-b border-gray-300 rounded-2xl p-2 px-10 bg-[#e87539]">
+          <div className="flex justify-between items-center text-base md:text-2xl font-semibold border-b border-gray-300 rounded-2xl p-2 px-10 border border-gray-300">
             <div>Namaz</div>
-            <div>Ezan</div>
+            <div className="mr-10">Ezan</div>
             <div>İkame</div>
           </div>
 
@@ -107,7 +107,9 @@ export default function PrayerTimes() {
               <SunriseIcon className="text-[#e87539]" />
               <span>Sabah</span>
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[0].time}</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[0].time + " a.m"}
+            </div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[0].iqamah} a.m
             </div>
@@ -119,7 +121,9 @@ export default function PrayerTimes() {
               <SunIcon className="text-[#e87539]" />
               <span>Öğle</span>
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[2].time}</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[2].time + " p.m"}
+            </div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[2].iqamah} p.m
             </div>
@@ -131,7 +135,9 @@ export default function PrayerTimes() {
               <SunIcon className="text-[#e87539]" />
               <span>İkindi</span>
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[3].time}</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[3].time + " p.m"}
+            </div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[3].iqamah} p.m
             </div>
@@ -143,7 +149,9 @@ export default function PrayerTimes() {
               <SunsetIcon className="text-[#e87539]" />
               <span>Akşam</span>
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[4].time}</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[4].time + " p.m"}
+            </div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[4].iqamah} p.m
             </div>
@@ -155,7 +163,9 @@ export default function PrayerTimes() {
               <MoonIcon className="text-[#e87539]" />
               <span>Yatsı</span>
             </div>
-            <div className="w-32">{data.payload.dailyPrayerTimes[5].time}</div>
+            <div className="w-32">
+              {data.payload.dailyPrayerTimes[5].time + " p.m"}
+            </div>
             <div className="w-32">
               {data.payload.dailyPrayerTimes[5].iqamah} p.m
             </div>
