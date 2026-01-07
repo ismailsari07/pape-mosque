@@ -1,14 +1,37 @@
 "use client";
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAllEvents, getEvent } from "@/lib/api/events";
-import { DataTable } from "../components/data-table";
+import {
+  createEvent,
+  deleteEvent,
+  getAllEvents,
+  getEvent,
+  updateEvent,
+} from "@/lib/api/events";
 import { createEventColumns } from "../events/table/columns";
 import { EventEditSheet } from "../events/components/EventEditSheet";
-import { EventUpdate } from "../events/types";
+import { EventPayload } from "../events/types";
 import { EventFormValues } from "../events/schema/eventForm.schema";
+import TabHeader from "../components/TabHeader";
+import { DataTable } from "../components/data-table";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { DataTableToolbar } from "../events/table/data-table-toolbar";
 
-function mapEventToFormValues(event: EventUpdate): EventFormValues | undefined {
+function mapEventToFormValues(
+  event: EventPayload,
+): EventFormValues | undefined {
   return {
     title: event.title,
     description: event.description,
@@ -22,20 +45,15 @@ function mapEventToFormValues(event: EventUpdate): EventFormValues | undefined {
 }
 
 export default function EventsPage() {
-  // const [deleteId, setDeleteId] = useState<string | null>(null);
-
-  // const handleDelete = (id: string) => {
-  //   if (window.confirm("Bu etkinliği silmek istediğinizden emin misiniz?")) {
-  //     deleteMutation.mutate(id);
-  //   }
-  // };
-
   // States
-  const [selectedEventId, setSelectedEventId] = useState<string | null>("");
+  const [selectedEventId, setSelectedEventId] = useState("");
+  const [alertDialog, openAlertDialog] = useState(false);
   const [editSheet, setEditSheet] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
 
   // Tanstack Process
   const queryClient = useQueryClient();
+
   const { data: eventsTable = [], isLoading } = useQuery({
     queryKey: ["table-events"],
     queryFn: getAllEvents,
@@ -45,18 +63,113 @@ export default function EventsPage() {
     queryKey: ["event-data", selectedEventId],
     queryFn: () => getEvent(selectedEventId!),
   });
-  const formDefaultValues: EventFormValues | undefined = eventData
-    ? mapEventToFormValues(eventData)
-    : undefined;
+
+  const updateEventMutation = useMutation({
+    mutationFn: ({ id, payload }: { id: string; payload: EventPayload }) =>
+      updateEvent(id, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["table-events"] });
+      queryClient.invalidateQueries({
+        queryKey: ["event-data", selectedEventId],
+      });
+
+      toast.success("Event updated successfully", {
+        description:
+          "The event details have been updated and published on the website.",
+      });
+    },
+    onError: (error) => {
+      toast.error("Unable to save changes", {
+        description:
+          "Please try again or refresh the page if the issue persists.",
+      });
+    },
+  });
+
+  const deleteEventMutation = useMutation({
+    mutationFn: ({ id }: { id: string }) => deleteEvent(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["table-events"] });
+
+      toast.success("Event deleted", {
+        description:
+          "The event has been removed and is no longer visible on the website.",
+      });
+    },
+    onError: (error) => {
+      toast.error("Unable to delete the event", {
+        description:
+          "Please try again or refresh the page if the issue persists.",
+      });
+    },
+  });
+
+  const insertEventMutation = useMutation({
+    mutationFn: ({ payload }: { payload: EventPayload }) =>
+      createEvent(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["table-events"] });
+      toast.success("Event created successfully", {
+        description: "The event is now live and visible on the website.",
+      });
+    },
+    onError: (error) => {
+      toast.error("Failed to create event", {
+        description: "The event could not be created. Please try again.",
+      });
+    },
+  });
+
+  // Get the form data ready for Sheet
+  const formDefaultValues: EventFormValues | undefined =
+    mode === "update" && eventData
+      ? mapEventToFormValues(eventData)
+      : undefined;
+  console.log("mode ==> ", mode);
+  console.log(
+    mode === "update" && eventData
+      ? mapEventToFormValues(eventData)
+      : undefined,
+  );
 
   // Create Columns
   const columns = createEventColumns({
-    onEdit: (id: string) => {
-      setSelectedEventId(id);
-
-      setEditSheet(true);
-    },
+    onClickEditButton: openEditSheet,
+    onClickDeleteButton: openDeleteAlert,
   });
+
+  // Event Actions' Object
+  const eventActions = {
+    create: (eventData: EventFormValues) => {
+      insertEventMutation.mutate({ payload: eventData });
+      setEditSheet(false);
+    },
+    update: (eventData: EventFormValues) => {
+      updateEventMutation.mutate({ id: selectedEventId, payload: eventData });
+      setEditSheet(false);
+    },
+    delete: () => {
+      deleteEventMutation.mutate({ id: selectedEventId });
+      openAlertDialog(false);
+    },
+  };
+
+  function openCreateSheet() {
+    setMode("create");
+    setSelectedEventId("");
+    setEditSheet(true);
+  }
+
+  function openEditSheet(id: string) {
+    setMode("update");
+    setSelectedEventId(id);
+    setEditSheet(true);
+  }
+
+  function openDeleteAlert(id: string) {
+    setSelectedEventId(id);
+    openAlertDialog(true);
+  }
 
   if (isLoading) {
     return (
@@ -68,147 +181,57 @@ export default function EventsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white">Events</h1>
-        <p className="text-neutral-400 mt-1">
-          Manage all events displayed on the public site.
-        </p>
-      </div>
-
-      {/* Events Table */}
+      <TabHeader
+        title="Events"
+        description="Manage all events displayed on the public site."
+      />
       <DataTable
         columns={columns}
         data={eventsTable}
-        renderToolbar={(table) => <></>}
+        renderToolbar={() => (
+          <DataTableToolbar onClickAddButton={openCreateSheet} />
+        )}
       />
-
       <EventEditSheet
         open={editSheet}
-        onOpenChange={setEditSheet}
+        mode={mode}
+        onOpenChange={(open) => {
+          setEditSheet(open);
+          if (!open) setSelectedEventId("");
+        }}
         defaultValues={formDefaultValues}
+        onSubmit={eventActions[mode]}
       />
-
-      {/* Events Table */}
-      {/*events && events.length > 0 ? (
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Sıra
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Başlık
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Gün / Saat
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Özellikler
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Durum
-                </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  İşlemler
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {events.map((event) => (
-                <tr key={event.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {event.display_order}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-gray-900">
-                      {event.title}
-                    </div>
-                    <div className="text-sm text-gray-500 line-clamp-1">
-                      {event.description}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{event.day}</div>
-                    <div className="text-sm text-gray-500">{event.time}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex gap-1">
-                      {event.is_recurring && (
-                        <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
-                          Haftalık
-                        </span>
-                      )}
-                      {event.is_featured && (
-                        <span className="px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800">
-                          Ana Sayfa
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {event.is_active ? (
-                      <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                        Aktif
-                      </span>
-                    ) : (
-                      <span className="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
-                        Pasif
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link
-                      href={`/admin/events/${event.id}/edit`}
-                      className="text-blue-600 hover:text-blue-900 mr-4 pointer-events-none"
-                    >
-                      Düzenle
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(event.id)}
-                      disabled={
-                        deleteMutation.isPending && deleteId === event.id
-                      }
-                      className="text-red-600 hover:text-red-900 disabled:opacity-50 pointer-events-none"
-                    >
-                      {deleteMutation.isPending && deleteId === event.id
-                        ? "Siliniyor..."
-                        : "Sil"}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div className="text-center py-12">
-            <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">
-              Henüz etkinlik yok
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Yeni etkinlik ekleyerek başlayın.
-            </p>
-            {/* <div className="mt-6">
-              <Link
-                href="/admin/events/new"
-                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-              >
-                + Yeni Etkinlik Ekle
-              </Link>
-            </div>*/}
+      <AlertDialog open={alertDialog} onOpenChange={openAlertDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you sure you want to delete this event?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. The event will be permanently
+              removed and will no longer be visible on the website.
+              <br />
+              <br />
+              This deletion will be logged, including who performed the action,
+              for audit and tracking purposes.
+              <br />
+              <br />
+              If this is a recurring or reusable event, you may choose to
+              disable it instead. Disabling will hide the event from the website
+              while allowing you to re-enable it later when needed.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <Button variant={"outline"} onClick={() => openAlertDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant={"destructive"} onClick={eventActions.delete}>
+              Delete Event
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

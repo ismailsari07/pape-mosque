@@ -1,7 +1,19 @@
-import { EventRow, EventUpdate } from "@/app/(protected)/admin/events/types";
+import { EventPayload, EventRow } from "@/app/(protected)/admin/events/types";
 import { supabase } from "@/lib/supabase/client";
 
-// Tüm etkinlikleri çek (Admin için - aktif + pasif)
+// Get The Event
+export async function getEvent(id: string): Promise<EventPayload> {
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
+// Get All Events
 export async function getAllEvents(): Promise<EventRow[]> {
   const { data, error } = await supabase
     .from("events")
@@ -12,16 +24,36 @@ export async function getAllEvents(): Promise<EventRow[]> {
   return data;
 }
 
-// Aktif etkinlikleri çek (Public için)
-export async function getEvents() {
+// Insert Event
+export async function createEvent(event: EventPayload) {
   const { data, error } = await supabase
     .from("events")
-    .select("*")
-    .eq("is_active", true)
-    .order("display_order", { ascending: true });
+    .insert(event)
+    .select()
+    .single();
 
   if (error) throw error;
   return data;
+}
+
+// Update Event
+export async function updateEvent(id: string, event: EventPayload) {
+  const { data, error } = await supabase
+    .from("events")
+    .update(event)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
+// Etkinlik sil
+export async function deleteEvent(id: string) {
+  const { error } = await supabase.from("events").delete().eq("id", id);
+
+  if (error) throw error;
 }
 
 // Ana sayfada gösterilecek etkinlikler (featured)
@@ -36,70 +68,4 @@ export async function getFeaturedEvents() {
 
   if (error) throw error;
   return data;
-}
-
-// Tek etkinlik çek
-export async function getEvent(id: string): Promise<EventUpdate> {
-  const { data, error } = await supabase
-    .from("events")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error) throw error;
-  return data;
-}
-
-// Yeni etkinlik ekle
-export async function createEvent(event: {
-  title: string;
-  description: string;
-  day: string;
-  time: string;
-  phone?: string;
-  is_recurring?: boolean;
-  is_featured?: boolean;
-  display_order?: number;
-}) {
-  const { data, error } = await supabase
-    .from("events")
-    .insert(event)
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
-}
-
-// Etkinlik güncelle
-export async function updateEvent(
-  id: string,
-  updates: {
-    title?: string;
-    description?: string;
-    day?: string;
-    time?: string;
-    phone?: string;
-    is_recurring?: boolean;
-    is_featured?: boolean;
-    display_order?: number;
-    is_active?: boolean;
-  },
-) {
-  const { data, error } = await supabase
-    .from("events")
-    .update(updates)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
-}
-
-// Etkinlik sil
-export async function deleteEvent(id: string) {
-  const { error } = await supabase.from("events").delete().eq("id", id);
-
-  if (error) throw error;
 }

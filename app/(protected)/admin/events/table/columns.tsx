@@ -15,9 +15,11 @@ import {
 import { MoreHorizontal } from "lucide-react";
 
 export function createEventColumns({
-  onEdit,
+  onClickEditButton,
+  onClickDeleteButton,
 }: {
-  onEdit: (id: string) => void;
+  onClickEditButton: (id: string) => void;
+  onClickDeleteButton: (id: string) => void;
 }): ColumnDef<EventRow>[] {
   return [
     {
@@ -79,8 +81,14 @@ export function createEventColumns({
                   Copy Event ID
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onSelect={() => onEdit(event.id)}>
+                <DropdownMenuItem onSelect={() => onClickEditButton(event.id)}>
                   Edit Event
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="text-red-400"
+                  onSelect={() => onClickDeleteButton(event.id)}
+                >
+                  Delete Event
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

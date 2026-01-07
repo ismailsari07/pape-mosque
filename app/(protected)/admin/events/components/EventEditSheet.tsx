@@ -18,19 +18,41 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { EventFormValues, eventSchema } from "../schema/eventForm.schema";
+import { EventPayload } from "../types";
 
 type Props = {
   open: boolean;
+  mode: "create" | "update";
   onOpenChange: (open: boolean) => void;
   defaultValues?: EventFormValues;
+  onSubmit: (payload: EventFormValues) => void;
 };
 
-export function EventEditSheet({ open, onOpenChange, defaultValues }: Props) {
+export function EventEditSheet({
+  open,
+  onOpenChange,
+  defaultValues,
+  onSubmit,
+  mode,
+}: Props) {
   useEffect(() => {
-    if (defaultValues) {
+    if (mode === "update" && defaultValues) {
       form.reset(defaultValues);
     }
-  }, [defaultValues]);
+
+    if (mode === "create") {
+      form.reset({
+        title: "",
+        description: "",
+        day: "",
+        time: "",
+        phone: "",
+        is_active: true,
+        is_featured: false,
+        is_recurring: false,
+      });
+    }
+  }, [mode, defaultValues]);
 
   const form = useForm<EventFormValues>({
     resolver: zodResolver(eventSchema),
@@ -47,7 +69,7 @@ export function EventEditSheet({ open, onOpenChange, defaultValues }: Props) {
           </SheetDescription>
         </SheetHeader>
         <form
-          onSubmit={form.handleSubmit(() => {})}
+          onSubmit={form.handleSubmit(onSubmit)}
           className="p-4 flex flex-col gap-3 h-full "
         >
           <div>

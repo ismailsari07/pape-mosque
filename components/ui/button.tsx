@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "text-base bg-foreground text-background font-medium",
         destructive:
-          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-red-950 text-red-100 shadow-xs hover:bg-text-800 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-red-900 border border-red-600",
         outline:
           "border border-neutral-800 bg-transparent shadow-xs hover:bg-neutral-700/50 hover:text-neutral-50",
         secondary: "bg-[#0e140c] text-[#d1cfc0] shadow-xs",
@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         table: "bg-transparent hover:bg-neutral-700/50",
+        dashboard:
+          "bg-neutral-900/70 border border-neutral-700 text-neutral-50 hover:bg-neutral-800",
       },
       size: {
         default: "px-6 py-4 rounded-xl",

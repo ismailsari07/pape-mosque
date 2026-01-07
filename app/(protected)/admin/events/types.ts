@@ -26,30 +26,15 @@ export type EventRow = {
   is_featured: boolean;
 };
 
-export type EventInsert = {
+export type EventPayload = {
   title: string;
   description: string;
   day: string;
   time: string;
   phone?: string | null;
 
-  is_recurring?: boolean;
-  is_featured?: boolean;
-  display_order?: number;
-  is_active?: boolean;
-};
-
-export type EventUpdate = {
-  id: string;
-
-  title: string;
-  description: string;
-  day: string;
-  time: string;
-  phone: string | null;
-
   is_recurring: boolean;
   is_featured: boolean;
-  display_order: number;
+  display_order?: number;
   is_active: boolean;
 };

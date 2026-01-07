@@ -7,6 +7,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { websiteJsonLd } from "@/lib/seo/websiteJsonLd";
 import { mosqueJsonLd } from "@/lib/seo/mosqueJsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo/breadcrumbJsonLd";
+import { Toaster } from "@/components/ui/sonner";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-sans",
@@ -77,6 +78,7 @@ export default function RootLayout({
         <Providers>
           <AuthProvider>{children}</AuthProvider>
         </Providers>
+        <Toaster position="top-center" richColors />
 
         <Script
           id="ld-website"

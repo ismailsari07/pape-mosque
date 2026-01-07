@@ -7,6 +7,7 @@ import { DataTable } from "../components/data-table";
 import { DataTableToolbar } from "../donations/components/data-table-toolbar";
 import { columns } from "../donations/table/columns";
 import { formatCurrency } from "../donations/helper";
+import TabHeader from "../components/TabHeader";
 
 export default function Donations() {
   const { data: donations = [], isLoading } = useQuery({
@@ -29,15 +30,11 @@ export default function Donations() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white">Bağışlar</h1>
-        <p className="text-neutral-400 mt-1">
-          Stripe üzerinden yapılan tüm bağışlar
-        </p>
-      </div>
+      <TabHeader
+        title="Bağışlar"
+        description="Stripe üzerinden yapılan tüm bağışlar."
+      />
 
-      {/* Stats Cards */}
       {stats && (
         <>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
