@@ -30,16 +30,16 @@ const events = [
   {
     title: "Aile Toplantısı",
     description:
-      "Her cuma yatsıdan sonra ailelerin buluşması, sohbet ve çay ikramı ile haftalık buluşma.",
-    time: "Cuma — Yatsı Namazı",
+      "Her perşembe yatsıdan sonra ailelerin buluşması, sohbet ve çay ikramı ile haftalık buluşma.",
+    time: "Perşembe — Yatsı Namazı",
     phone: "(416) 778-0014",
     priority: "weekly",
   },
   {
     title: "Kur’an Dersi",
     description:
-      "Her pazartesi genç yetişkinler için Kur’an dersi, yatsı namazının ardından düzenlenmektedir.",
-    time: "Pazartesi — Yatsı Namazı",
+      "Her pazar genç yetişkinler için Kur’an dersi, yatsı namazının ardından düzenlenmektedir.",
+    time: "Pazar — Yatsı Namazı",
     phone: "(416) 778-0014",
     priority: "weekly",
   },
@@ -73,12 +73,16 @@ export default function About() {
       className="container flex flex-col gap-24 py-8 lg:py-32"
     >
       <div className="flex flex-col gap-3">
-        <motion.p className="text-4xl lg:text-6xl font-bold" variants={item}>Hizmetlerimiz</motion.p>
+        <motion.p className="text-4xl lg:text-6xl font-bold" variants={item}>
+          Hizmetlerimiz
+        </motion.p>
         <motion.p className="text-lg max-w-4xl" variants={item}>
           Derneğimizin yerine getirdiği vazifelerden biri de Toronto ve
           civarında vefat eden vatandaşlarımızın defin işleridir.
         </motion.p>
-        <motion.p className="text-3xl font-bold mt-7" variants={item}>Defin Hizmetleri</motion.p>
+        <motion.p className="text-3xl font-bold mt-7" variants={item}>
+          Defin Hizmetleri
+        </motion.p>
         <motion.p className="text-lg max-w-4xl" variants={item}>
           Cenaze ve defin işlemlerinde, aşağıda belirtilen yöneticilerimiz
           toplumumuza her konuda destek sağlamaktadır. Tüm hizmetler, dini
@@ -100,29 +104,39 @@ export default function About() {
         </motion.p>
 
         <div className="flex flex-col gap-2 flex-wrap">
-          <motion.div className="flex items-center gap-2 text-lg font-bold" variants={item}>
+          <motion.div
+            className="flex items-center gap-2 text-lg font-bold"
+            variants={item}
+          >
             <PhoneIcon size={16} className="text-green-400" />
             <span className="text-green-400">Fatih Sirinogullari:</span>
             <a href="tel:" className="underline">
               437 995 9470
             </a>
           </motion.div>
-          <motion.div className="flex items-center gap-2 text-lg font-bold" variants={item}>
+          <motion.div
+            className="flex items-center gap-2 text-lg font-bold"
+            variants={item}
+          >
             <PhoneIcon size={16} className="text-green-400" />
             <span className="text-green-400">Ahmet Er:</span>
             <a href="tel:" className="underline">
               647 709 7219
             </a>
           </motion.div>
-          <motion.div className="flex items-center gap-2 text-lg font-bold" variants={item}>
+          <motion.div
+            className="flex items-center gap-2 text-lg font-bold"
+            variants={item}
+          >
             <LocateIcon size={16} className="text-green-400" />
             Ajax Pine Ridge Memorial Gardens : 1757 Church St N Ajax, ON L1T 4T2
           </motion.div>
         </div>
-
       </div>
       <div className="flex flex-col gap-3">
-        <motion.p className="text-4xl md:text-6xl font-bold" variants={item}>Faaliyetler</motion.p>
+        <motion.p className="text-4xl md:text-6xl font-bold" variants={item}>
+          Faaliyetler
+        </motion.p>
         <motion.p className="text-lg max-w-4xl" variants={item}>
           Camimizde dini sohbetler, kültürel etkinlikler ve toplumsal buluşmalar
           düzenlenmektedir. Tüm faaliyetlerimizi yakından takip edebilir.
@@ -131,7 +145,7 @@ export default function About() {
         <div className="flex flex-col md:flex-row flex-wrap gap-3 justify-between md:mt-8">
           {events.map((event, i) => (
             <motion.div
-            variants={item}
+              variants={item}
               key={i}
               className="md:w-[32%] flex flex-col items-start text-left gap-2 p-5 border border-gray-100 rounded-2xl"
             >

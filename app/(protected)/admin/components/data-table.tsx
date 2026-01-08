@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  renderToolbar?: (table: any) => React.ReactNode;
+  renderToolbar: (table: any) => React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({

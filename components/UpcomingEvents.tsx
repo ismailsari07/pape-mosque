@@ -20,8 +20,8 @@ const events = [
   {
     title: "Aile Toplantısı",
     description:
-      "Her cuma yatsıdan sonra ailelerin buluşması, sohbet ve çay ikramı ile haftalık buluşma.",
-    time: "Cuma — Yatsı Namazı",
+      "Her perşembe yatsıdan sonra ailelerin buluşması, sohbet ve çay ikramı ile haftalık buluşma.",
+    time: "Perşembe — Yatsı Namazı",
     phone: "(416) 778-0014",
     priority: "haftalık",
   },
