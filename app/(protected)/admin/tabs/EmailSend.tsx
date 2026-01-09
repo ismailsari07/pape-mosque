@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function EmailSend() {
   const emailSendMutation = useMutation({
-    mutationFn: async (payload: { to: string }) => {
+    mutationFn: async ({ payload }: { payload: EmailSendFormValues }) => {
       const res = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -41,8 +41,8 @@ export default function EmailSend() {
     defaultValues,
   });
 
-  function handleSubmit(e: any) {
-    emailSendMutation.mutate({ to: form.getValues("to") });
+  function handleSubmit(payload: EmailSendFormValues) {
+    emailSendMutation.mutate({ payload: payload });
   }
 
   return (
@@ -58,7 +58,7 @@ export default function EmailSend() {
           <Input
             {...form.register("subject")}
             className="border-neutral-800 text-white bg-neutral-900"
-            placeholder="Cenaze Duyurusu"
+            placeholder="Duyuru"
           />
         </div>
 
@@ -67,7 +67,7 @@ export default function EmailSend() {
           <Input
             {...form.register("title")}
             className="border-neutral-800 text-white bg-neutral-900"
-            placeholder="Merhum / Merhume Bilgisi"
+            placeholder="Title"
           />
         </div>
 
@@ -76,7 +76,7 @@ export default function EmailSend() {
           <Input
             {...form.register("to")}
             className="border-neutral-800 text-white bg-neutral-900"
-            placeholder="Merhum / Merhume Bilgisi"
+            placeholder="Kime"
           />
         </div>
 
@@ -85,7 +85,7 @@ export default function EmailSend() {
           <Textarea
             {...form.register("description")}
             className="border-neutral-800 text-white bg-neutral-900"
-            placeholder="Cenaze bilgileri..."
+            placeholder="Description"
           />
         </div>
 

@@ -10,6 +10,7 @@ export default function AdminClient() {
   const tab = searchParams.get("tab") ?? "events";
 
   if (tab === "donations") return <Donations />;
+  if (tab === "events") return <Events />;
   if (tab === "email") return <EmailSend />;
 
   return <Events />;
