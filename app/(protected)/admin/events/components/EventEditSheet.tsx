@@ -10,15 +10,12 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
 import { EventFormValues, eventSchema } from "../schema/eventForm.schema";
-import { EventPayload } from "../types";
 
 type Props = {
   open: boolean;

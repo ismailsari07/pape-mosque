@@ -9,7 +9,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 const TABS = [
   { id: "events", label: "Events" },
   // { id: "users", label: "Users" },
-  { id: "announcements", label: "Announcements" },
+  { id: "email", label: "Send Email" },
   { id: "donations", label: "Donations" },
 ];
 
